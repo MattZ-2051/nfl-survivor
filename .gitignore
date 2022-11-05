@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ENV files
+.env.production
+.env.development
+
+# formatting files
+.eslint.json
+.prettierrc

@@ -1,8 +1,8 @@
-function App() {
 
+function App() {
   return (
     <div className="text-5xl">
-      Home
+      here
     </div>
   )
 }
