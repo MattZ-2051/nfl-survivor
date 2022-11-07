@@ -1,7 +1,13 @@
-import React from 'react'
+import { FC } from 'react'
+import Main from '@layout/Main'
+import Home from '@views/Home'
 
-function App() {
-    return <div className="text-5xl">here</div>
+const App: FC = () => {
+    return (
+        <Main>
+            <Home />
+        </Main>
+    )
 }
 
 export default App
