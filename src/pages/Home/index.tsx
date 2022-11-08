@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import Button from '@components/Button'
-import { getTeams } from '@api/external'
 import Header from '@layout/Header'
 
 const Home: FC = (): JSX.Element => {
@@ -8,9 +7,7 @@ const Home: FC = (): JSX.Element => {
         <div>
             <Header />
             <h1>Home Page</h1>
-            <Button type="primary">
-                <div onClick={getTeams}>button</div>
-            </Button>
+            <Button type="primary" label="button" />
         </div>
     )
 }

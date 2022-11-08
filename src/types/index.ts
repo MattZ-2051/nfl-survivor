@@ -4,3 +4,8 @@ export type PageError = {
     statusText?: string
     message?: string
 }
+
+export type ApiOptions = RequestInit & {
+    params?: string | string[][] | Record<string, string> | URLSearchParams
+    authorization?: boolean
+}

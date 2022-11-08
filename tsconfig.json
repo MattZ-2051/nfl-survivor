@@ -22,7 +22,7 @@
             "@util/*": ["src/util/*"],
             "@layout/*": ["src/layout/*"],
             "@assets/*": ["src/assets/*"],
-            "@types/*": ["src/types/*"],
+            "@types": ["src/types/index.ts"],
             "@api/*": ["src/api/*"]
         }
     },

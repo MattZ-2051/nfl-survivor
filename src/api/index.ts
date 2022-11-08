@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ApiOptions } from './types'
+import { ApiOptions } from '@types'
 
 export const get = async (path: string, options: ApiOptions): Promise<any> => {
     if (options.authorization) {
