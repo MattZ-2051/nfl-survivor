@@ -1,13 +1,14 @@
 import { FC } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import router from './routes'
 import Main from '@layout/Main'
 import Header from '@layout/Header'
-import Home from '@pages/Home'
 
 const App: FC = () => {
     return (
         <Main>
             <Header />
-            <Home />
+            <RouterProvider router={router} />
         </Main>
     )
 }
