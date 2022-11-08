@@ -7,7 +7,6 @@ import Header from '@layout/Header'
 const App: FC = () => {
     return (
         <Main>
-            <Header />
             <RouterProvider router={router} />
         </Main>
     )
