@@ -18,10 +18,12 @@
         "baseUrl": ".",
         "paths": {
             "@components/*": ["src/components/*"],
-            "@views/*": ["src/views/*"],
+            "@pages/*": ["src/pages/*"],
             "@util/*": ["src/util/*"],
             "@layout/*": ["src/layout/*"],
-            "@assets/*": ["src/assets/*"]
+            "@assets/*": ["src/assets/*"],
+            "@types/*": ["src/types/*"],
+            "@api/*": ["src/api/*"]
         }
     },
 

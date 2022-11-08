@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import Main from '@layout/Main'
-import Home from '@views/Home'
+import Header from '@layout/Header'
+import Home from '@pages/Home'
 
 const App: FC = () => {
     return (
         <Main>
+            <Header />
             <Home />
         </Main>
     )
