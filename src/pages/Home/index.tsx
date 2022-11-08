@@ -8,7 +8,7 @@ const Home: FC = (): JSX.Element => {
         <div>
             <Header />
             <h1>Home Page</h1>
-            <Button>
+            <Button type="primary">
                 <div onClick={getTeams}>button</div>
             </Button>
         </div>
