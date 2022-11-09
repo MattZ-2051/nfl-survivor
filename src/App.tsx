@@ -1,13 +1,12 @@
 import { FC } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import router from './routes'
+import { browserRouter } from '@routes'
 import Main from '@layout/Main'
-import Header from '@layout/Header'
 
 const App: FC = () => {
     return (
         <Main>
-            <RouterProvider router={router} />
+            <RouterProvider router={browserRouter} />
         </Main>
     )
 }

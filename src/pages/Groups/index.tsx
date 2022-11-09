@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import Header from '@layout/Header'
 
-const Home: FC = (): JSX.Element => {
+const Groups: FC = () => {
     return (
         <div>
             <Header />
-            <h1>Home Page</h1>
+            <h1>Group Page</h1>
         </div>
     )
 }
 
-export default Home
+export default Groups
