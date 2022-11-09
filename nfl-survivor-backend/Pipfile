@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 eth-brownie = ">=1.10.0,<2.0.0"
+django = "*"
 
 [dev-packages]
 
