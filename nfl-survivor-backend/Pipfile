@@ -6,7 +6,8 @@ name = "pypi"
 [scripts]
 format = "pipenv run black ."
 dev = "python api/manage.py runserver"
-migrate = "python api/manage.py makemigrations survivor"
+migrate = "python api/manage.py migrate"
+make-migrations = "python api/manage.py makemigrations survivor"
 
 [packages]
 eth-brownie = ">=1.10.0,<2.0.0"

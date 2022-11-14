@@ -7,3 +7,4 @@ reports/
 .env.production
 .env.development
 settings.py
+migrations
