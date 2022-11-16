@@ -1,16 +1,14 @@
-import { ChangeEvent, ChangeEventHandler, FC } from 'react'
+import { FC } from 'react'
 import Form from '@components/Form'
 import Button from '@components/Button'
 import { sessionCreateFx } from '@api/user'
-import { $user } from '@store/user'
-import { useEvent, useStore } from 'effector-react'
+import { useEvent } from 'effector-react'
 import { useState } from 'react'
 
 const Login: FC = () => {
     const login = useEvent(sessionCreateFx)
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
-    const user = useStore($user)
     const userLogin = async () => {
         if (username && password) {
             login({
