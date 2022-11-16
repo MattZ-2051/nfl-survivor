@@ -1,28 +1,35 @@
-import { FC } from 'react'
+import { ChangeEvent, ChangeEventHandler, FC } from 'react'
 import Form from '@components/Form'
 import Button from '@components/Button'
 import { sessionCreateFx } from '@api/user'
 import { $user } from '@store/user'
 import { useEvent, useStore } from 'effector-react'
+import { useState } from 'react'
 
 const Login: FC = () => {
     const login = useEvent(sessionCreateFx)
-    const userStore = useStore($user)
+    const [username, setUsername] = useState<string>()
+    const [password, setPassword] = useState<string>()
+    const user = useStore($user)
     const userLogin = async () => {
-        login()
+        if (username && password) {
+            login({
+                username,
+                password,
+            })
+        }
     }
     return (
         <div className="w-full h-screen flex items-center justify-center">
             <div className="flex justify-center">
                 <div>
-                    <Form onSubmit={userLogin}>
+                    <Form onSubmit={userLogin} method="post">
                         <p className="text-center text-5xl font-bold mb-8">
                             Login
                         </p>
-                        <p>{userStore?.username}</p>
                         <div className="form-floating mb-3 xl:w-96">
                             <input
-                                type="email"
+                                type="text"
                                 className="form-control
                                         block
                                         w-full
@@ -39,13 +46,14 @@ const Login: FC = () => {
                                         m-0
                                         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 id="floatingInput"
-                                placeholder="name@example.com"
+                                placeholder="user123"
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                             <label
                                 htmlFor="floatingInput"
                                 className="text-gray-700"
                             >
-                                Email address
+                                Username
                             </label>
                         </div>
                         <div className="form-floating mb-3 xl:w-96">
@@ -68,6 +76,7 @@ const Login: FC = () => {
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 id="floatingPassword"
                                 placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <label
                                 htmlFor="floatingPassword"

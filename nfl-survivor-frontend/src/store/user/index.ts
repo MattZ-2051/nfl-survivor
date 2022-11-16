@@ -1,9 +1,12 @@
 import { createEvent, createStore } from 'effector'
 import { sessionCreateFx } from '@api/user'
 import { User } from '@types/user'
+import { decodeJwtToken } from '@utils'
 
 sessionCreateFx.doneData.watch((result) => {
-    loginSuccess(result)
+    const tokenData = decodeJwtToken(result.access)
+    localStorage.setItem('authTokens', JSON.stringify(result))
+    loginSuccess({ username: tokenData.username, authTokens: result })
 })
 
 sessionCreateFx.failData.watch((error) => {

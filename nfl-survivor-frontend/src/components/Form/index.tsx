@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import { Form as RouterForm } from 'react-router-dom'
+import { Form as RouterForm, FormMethod } from 'react-router-dom'
 
 interface IProps {
     children: JSX.Element | JSX.Element[]
     onSubmit: () => void
+    method: FormMethod
 }
-const Form: FC<IProps> = ({ children, onSubmit }) => {
+const Form: FC<IProps> = ({ children, onSubmit, method }) => {
     return (
-        <RouterForm method="post" onSubmit={onSubmit}>
+        <RouterForm method={method} onSubmit={onSubmit}>
             {children}
         </RouterForm>
     )

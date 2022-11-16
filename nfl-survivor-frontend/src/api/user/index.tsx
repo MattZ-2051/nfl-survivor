@@ -1,9 +1,13 @@
 import { createEffect } from 'effector'
-import type { User } from '@types/user'
-import { get } from '../index'
+import type { AuthTokens, User } from '@types/user'
+import { get, post } from '../index'
 
-export const sessionCreateFx = createEffect<void, User>(async () => {
-    return { username: 'test' }
+export const sessionCreateFx = createEffect<
+    { username: string; password: string },
+    AuthTokens
+>(async ({ username, password }) => {
+    const response = await post('/api/token/', { username, password })
+    return response.data
 })
 
 export const sessionDeleteFx = createEffect<void, null>(async () => {

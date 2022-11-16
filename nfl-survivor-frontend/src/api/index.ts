@@ -10,3 +10,15 @@ const axiosInstance = axios.create({
 export const get = async (path: string, options?: ApiOptions): Promise<any> => {
     return await axiosInstance.get(path)
 }
+
+export const post = async (
+    path: string,
+    data: any,
+    options?: ApiOptions
+): Promise<any> => {
+    return await axiosInstance.post(path, data, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+}
