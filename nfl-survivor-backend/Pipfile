@@ -5,9 +5,9 @@ name = "pypi"
 
 [scripts]
 format = "pipenv run black ."
-dev = "python api/manage.py runserver"
-migrate = "python api/manage.py migrate"
-make-migrations = "python api/manage.py makemigrations survivor"
+dev = "python src/manage.py runserver"
+migrate = "python src/manage.py migrate"
+make-migrations = "python src/manage.py makemigrations survivor"
 
 [packages]
 eth-brownie = ">=1.10.0,<2.0.0"
@@ -17,6 +17,10 @@ python-dotenv = "*"
 django-cors-headers = "*"
 black = "*"
 pylint = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

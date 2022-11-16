@@ -1,9 +1,13 @@
+import Header from '@layout/Header'
 import { FC } from 'react'
+import { Outlet } from 'react-router-dom'
 
-interface IProps {
-    children: JSX.Element | JSX.Element[]
-}
-const Main: FC<IProps> = ({ children }) => {
-    return <div className="w-full h-screen">{children}</div>
+const Main: FC = () => {
+    return (
+        <div className="w-full h-screen" id="detail">
+            <Header />
+            <Outlet />
+        </div>
+    )
 }
 export default Main

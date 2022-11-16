@@ -4,11 +4,7 @@ import { browserRouter } from '@routes'
 import Main from '@layout/Main'
 
 const App: FC = () => {
-    return (
-        <Main>
-            <RouterProvider router={browserRouter} />
-        </Main>
-    )
+    return <RouterProvider router={browserRouter} />
 }
 
 export default App

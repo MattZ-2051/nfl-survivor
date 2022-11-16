@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ApiOptions } from '@types'
+import ApiOptions from '@types/api'
 
 const baseURL = import.meta.env?.VITE_API_URL
 
@@ -8,5 +8,5 @@ const axiosInstance = axios.create({
 })
 
 export const get = async (path: string, options?: ApiOptions): Promise<any> => {
-  return await axiosInstance.get(path)
+    return await axiosInstance.get(path)
 }
