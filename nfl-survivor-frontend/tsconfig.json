@@ -19,7 +19,7 @@
         "paths": {
             "@components/*": ["src/components/*"],
             "@pages/*": ["src/pages/*"],
-            "@util/*": ["src/util/*"],
+            "@utils": ["src/utils/index.ts"],
             "@layout/*": ["src/layout/*"],
             "@assets/*": ["src/assets/*"],
             "@routes": ["src/routes/index.tsx"],
