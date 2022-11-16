@@ -23,8 +23,9 @@
             "@layout/*": ["src/layout/*"],
             "@assets/*": ["src/assets/*"],
             "@routes": ["src/routes/index.tsx"],
-            "@types": ["src/types/index.ts"],
-            "@api/*": ["src/api/*"]
+            "@types/*": ["src/types/*"],
+            "@api/*": ["src/api/*"],
+            "@store/*": ["src/store/*"]
         }
     },
 

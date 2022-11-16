@@ -35,7 +35,11 @@ const Header: FC = () => {
                         <Button type="primary" label="Signup" />
                     </div>
                     <div>
-                        <Button type="primary" label="Login" />
+                        <Button
+                            type="primary"
+                            label="Login"
+                            redirectTo={routes.login}
+                        />
                     </div>
                 </div>
             </div>
