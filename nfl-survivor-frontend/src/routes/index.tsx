@@ -28,7 +28,7 @@ const PrivateRoute = () => {
 
 const UnauthenticatedRoutes = () => {
     const user = useStore($user)
-    return !user?.username ? <Outlet /> : <Navigate to="/home" />
+    return !user ? <Outlet /> : <Navigate to="/home" />
 }
 
 export const browserRouter = createBrowserRouter(

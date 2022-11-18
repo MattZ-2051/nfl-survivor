@@ -10,9 +10,11 @@ export const sessionCreateFx = createEffect<
     return response.data
 })
 
-export const sessionDeleteFx = createEffect<void, null>(async () => {
+export const sessionDeleteFx = createEffect<void, null>(() => {
+    localStorage.removeItem('authTokens')
     return null
 })
+
 export const test = () => {
     return get('polls/')
 }

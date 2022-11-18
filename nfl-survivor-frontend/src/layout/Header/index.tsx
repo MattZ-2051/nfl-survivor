@@ -1,12 +1,19 @@
 import { FC } from 'react'
 import Button from '@components/Button'
 import { routes } from '@routes'
-import { createStoreConsumer } from 'effector-react'
+import { createStoreConsumer, useEvent } from 'effector-react'
 import { $user } from '@store/user'
+import { sessionDeleteFx } from '@api/user'
 
 const HeaderStoreConsumer = createStoreConsumer($user)
 
 const Header: FC = () => {
+    const logout = useEvent(sessionDeleteFx)
+    const userLogout = () => {
+      console.log('here')
+      logout()
+    }
+
     return (
         <HeaderStoreConsumer>
             {(user) => (
@@ -40,7 +47,11 @@ const Header: FC = () => {
                                 </div>
                                 {user ? (
                                     <div>
-                                        <Button type="primary" label="Logout" />
+                                        <Button
+                                            type="primary"
+                                            label="Logout"
+                                            onClick={userLogout}
+                                        />
                                     </div>
                                 ) : (
                                     <>
