@@ -30,3 +30,5 @@ dist-ssr
 # formatting files
 .eslint.json
 .prettierrc
+
+.DS_Store

@@ -1,9 +1,10 @@
-export type AuthTokens = {
-    refresh: string
-    access: string
-}
-
 export type User = {
     username: string
-    authTokens: AuthTokens
+    password: string
+}
+
+export type NewUser = {
+    username: string
+    password: string
+    rePassword: string
 }

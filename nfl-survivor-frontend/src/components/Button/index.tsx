@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { ButtonType } from '@types/components'
 import clsx from 'clsx'
-
-type ButtonType = 'primary' | 'outlined'
 
 interface IProps {
     type: ButtonType

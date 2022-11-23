@@ -4,7 +4,6 @@ import Button from '@components/Button'
 import { signup } from '@api/user'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 
 const Login: FC = () => {
     const login = useEvent(signup)
@@ -13,12 +12,11 @@ const Login: FC = () => {
     const [rePassword, setRePassword] = useState<string>()
     const userLogin = async () => {
         if (username && password && rePassword) {
-            const res = login({
+            login({
                 username,
                 password,
                 rePassword,
             })
-            // console.log('here', await res)
         }
     }
     return (
