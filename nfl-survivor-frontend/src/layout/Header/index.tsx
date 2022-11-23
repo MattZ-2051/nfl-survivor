@@ -10,8 +10,7 @@ const HeaderStoreConsumer = createStoreConsumer($user)
 const Header: FC = () => {
     const logout = useEvent(sessionDeleteFx)
     const userLogout = () => {
-      console.log('here')
-      logout()
+        logout()
     }
 
     return (
