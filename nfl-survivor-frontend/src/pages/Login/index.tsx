@@ -1,20 +1,24 @@
 import { FC } from 'react'
 import Form from '@components/Form'
 import Button from '@components/Button'
-import { sessionCreateFx } from '@api/user'
+import { signup } from '@api/user'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const Login: FC = () => {
-    const login = useEvent(sessionCreateFx)
+    const login = useEvent(signup)
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
+    const [rePassword, setRePassword] = useState<string>()
     const userLogin = async () => {
-        if (username && password) {
-            login({
+        if (username && password && rePassword) {
+            const res = login({
                 username,
                 password,
+                rePassword,
             })
+            // console.log('here', await res)
         }
     }
     return (
@@ -81,6 +85,35 @@ const Login: FC = () => {
                                 className="text-gray-700"
                             >
                                 Password
+                            </label>
+                        </div>
+                        <div className="form-floating mb-3 xl:w-96">
+                            <input
+                                type="password"
+                                className="form-control
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="floatingPassword"
+                                placeholder="Confirm Password"
+                                onChange={(e) => setRePassword(e.target.value)}
+                            />
+                            <label
+                                htmlFor="floatingPassword"
+                                className="text-gray-700"
+                            >
+                                Confirm Password
                             </label>
                         </div>
                         <Button

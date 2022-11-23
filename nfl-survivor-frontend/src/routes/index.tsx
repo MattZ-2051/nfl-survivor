@@ -51,7 +51,7 @@ export const browserRouter = createBrowserRouter(
                         <Route
                             path={routes.login}
                             element={<Login />}
-                            action={() => console.log('action')}
+                            action={() => {}}
                         />
                     </Route>
                     {/*  */}
