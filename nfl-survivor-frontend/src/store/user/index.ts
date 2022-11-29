@@ -1,30 +1,18 @@
 import { createEvent, createStore } from 'effector'
-import { signupFx, sessionDeleteFx, sessionLoginFx } from '@api/user'
+import { loginFx, sessionDeleteFx } from '@api/user'
 import { User } from '@types/user'
-import { toast } from 'react-toastify'
+import { decodeJwtToken } from '@utils'
 
-signupFx.doneData.watch((result) => {
-    console.log('here', result)
-    // execute login event here
+loginFx.doneData.watch((result) => {
+    const tokenData = decodeJwtToken(result.access)
+    localStorage.setItem('authTokens', JSON.stringify(result))
+    login({ username: tokenData.username, authTokens: result })
 })
 
-signupFx.failData.watch((error) => {
-    const errorMessage = error?.response?.data
-    console.log('error', errorMessage, error)
-    toast.error('signup error')
-    return errorMessage
+loginFx.failData.watch((error) => {
+    console.log('error', error)
 })
 
-sessionLoginFx.doneData.watch((result) => {
-    console.log('here', result)
-})
-
-sessionDeleteFx.failData.watch((result) => {
-    const errorMessage = error?.response?.data
-    console.log('error', errorMessage, error)
-    toast.error('signup error')
-    return errorMessage
-})
 sessionDeleteFx.doneData.watch(() => {
     logout()
 })

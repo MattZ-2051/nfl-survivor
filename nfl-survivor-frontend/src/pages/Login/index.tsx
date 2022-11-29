@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import Form from '@components/Form'
 import Button from '@components/Button'
-import { sessionLoginFx } from '@api/user'
+import { loginFx } from '@api/user'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
 
 const Login: FC = () => {
-    const login = useEvent(sessionLoginFx)
+    const login = useEvent(loginFx)
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
     const userLogin = async () => {

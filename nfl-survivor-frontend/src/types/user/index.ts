@@ -1,14 +1,9 @@
-export type UserProfile = {
-    username: string
+export type AuthTokens = {
+    refresh: string
+    access: string
 }
 
-export type NewUser = {
+export type User = {
     username: string
-    password: string
-    rePassword: string
-}
-
-export type UserAuth = {
-    username: string
-    password: string
+    authTokens: AuthTokens
 }

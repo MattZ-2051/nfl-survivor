@@ -1,27 +1,19 @@
 import { createEffect } from 'effector'
-import type { NewUser, User, UserAuth } from '@types/user'
+import type { User, AuthTokens } from '@types/user'
 import { get, post } from '../index'
 
-export const signupFx = createEffect<NewUser, User>(
-    async ({ username, password, rePassword }) => {
-        return await post('/api/auth/signup/', {
-            username,
-            password,
-            re_password: rePassword,
-        })
-    }
-)
+export const loginFx = createEffect<
+    { username: string; password: string },
+    AuthTokens
+>(async ({ username, password }) => {
+    const response = await post('/api/token/', { username, password })
+    return response.data
+})
 
-export const sessionLoginFx = createEffect<UserAuth, User>(
-    async ({ username, password }) => {
-        return await post('/api/auth/login/', {
-            username,
-            password,
-        })
-    }
-)
-
-export const sessionDeleteFx = createEffect<void, null>(() => {})
+export const sessionDeleteFx = createEffect<void, null>(() => {
+    localStorage.removeItem('authTokens')
+    return null
+})
 
 export const test = async () => {
     return await get('api/test/auth/')
