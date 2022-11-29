@@ -23,7 +23,7 @@ export const routes = {
 }
 const PrivateRoute = () => {
     const user = useStore($user)
-    return user?.username ? <Outlet /> : <Navigate to="/login" />
+    return user ? <Outlet /> : <Navigate to="/login" />
 }
 
 const UnauthenticatedRoutes = () => {
@@ -36,14 +36,12 @@ export const browserRouter = createBrowserRouter(
         <>
             <Route path="/" element={<Main />}>
                 <Route errorElement={<ErrorPage />}>
-                    <Route path="/" element={<Header />}>
-                        {/* Public Routes  */}
-                        <Route path={routes.home} element={<Home />} />
-                        {/*  */}
-                        {/* Private Routes  */}
-                        <Route path="/" element={<PrivateRoute />}>
-                            <Route path={routes.groups} element={<Groups />} />
-                        </Route>
+                    {/* Public Routes  */}
+                    <Route path={'home'} element={<Home />} />
+                    {/*  */}
+                    {/* Private Routes  */}
+                    <Route path="/" element={<PrivateRoute />}>
+                        <Route path={routes.groups} element={<Groups />} />
                     </Route>
                     {/*  */}
                     {/* Routes that Can't be accessed if logged in  */}
@@ -54,6 +52,7 @@ export const browserRouter = createBrowserRouter(
                             action={() => {}}
                         />
                     </Route>
+
                     {/*  */}
                 </Route>
             </Route>

@@ -1,20 +1,30 @@
 import { createEvent, createStore } from 'effector'
-import { signup, sessionDeleteFx } from '@api/user'
+import { signupFx, sessionDeleteFx, sessionLoginFx } from '@api/user'
 import { User } from '@types/user'
 import { toast } from 'react-toastify'
 
-signup.doneData.watch((result) => {
+signupFx.doneData.watch((result) => {
     console.log('here', result)
     // execute login event here
 })
 
-signup.failData.watch((error) => {
+signupFx.failData.watch((error) => {
     const errorMessage = error?.response?.data
     console.log('error', errorMessage, error)
     toast.error('signup error')
     return errorMessage
 })
 
+sessionLoginFx.doneData.watch((result) => {
+    console.log('here', result)
+})
+
+sessionDeleteFx.failData.watch((result) => {
+    const errorMessage = error?.response?.data
+    console.log('error', errorMessage, error)
+    toast.error('signup error')
+    return errorMessage
+})
 sessionDeleteFx.doneData.watch(() => {
     logout()
 })
