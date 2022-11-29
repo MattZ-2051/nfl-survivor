@@ -1,6 +1,6 @@
 import { createEvent, createStore } from 'effector'
 import { loginFx, sessionDeleteFx } from '@api/user'
-import { User } from '@types/user'
+import { User } from '@types'
 import { decodeJwtToken } from '@utils'
 
 loginFx.doneData.watch((result) => {

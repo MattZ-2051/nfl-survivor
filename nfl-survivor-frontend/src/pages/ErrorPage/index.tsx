@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useRouteError } from 'react-router-dom'
-import type { PageError } from '@types/pages'
+import type { PageError } from '@types'
 
 const ErrorPage: FC = (): JSX.Element => {
     const error = useRouteError()

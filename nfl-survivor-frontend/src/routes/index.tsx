@@ -6,11 +6,11 @@ import {
     Outlet,
 } from 'react-router-dom'
 
-import ErrorPage from '@pages/ErrorPage'
+import { ErrorPage } from '@pages'
 import { Home, Groups, Login } from '@pages'
 import { Main, Header } from '@layout'
 import { useStore } from 'effector-react'
-import { $user } from '@store/user'
+import { $user } from '@store'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const routes = {

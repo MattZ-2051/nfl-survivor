@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import Button from '@components/Button'
+import { Button } from '@components'
 import { routes } from '@routes'
 import { createStoreConsumer, useEvent } from 'effector-react'
-import { $user } from '@store/user'
+import { $user } from '@store'
 import { sessionDeleteFx } from '@api/user'
 
 const HeaderStoreConsumer = createStoreConsumer($user)
