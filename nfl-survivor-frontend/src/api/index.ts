@@ -1,5 +1,5 @@
 import axios from 'axios'
-import ApiOptions from '@types/api'
+import type { ApiOptions } from '@types'
 
 const baseURL = import.meta.env?.VITE_API_URL
 

@@ -1,5 +1,5 @@
 import { createEffect } from 'effector'
-import type { User, AuthTokens } from '@types/user'
+import type { User, AuthTokens } from '@types'
 import { get, post } from '../index'
 
 export const loginFx = createEffect<

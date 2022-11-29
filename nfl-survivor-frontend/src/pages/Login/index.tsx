@@ -1,6 +1,5 @@
 import { FC } from 'react'
-import Form from '@components/Form'
-import Button from '@components/Button'
+import { Button, Form } from '@components'
 import { loginFx } from '@api/user'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'

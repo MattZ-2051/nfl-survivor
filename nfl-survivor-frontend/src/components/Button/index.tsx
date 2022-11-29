@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { ButtonType } from '@types/components'
+import { ButtonType } from '@types'
 import clsx from 'clsx'
 
 interface IProps {
