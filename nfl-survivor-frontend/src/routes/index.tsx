@@ -7,14 +7,11 @@ import {
 } from 'react-router-dom'
 
 import ErrorPage from '@pages/ErrorPage'
-import Home from '@pages/Home'
-import Groups from '@pages/Groups'
-import Login from '@pages/Login'
-import Main from '@layout/Main'
+import { Home, Groups, Login } from '@pages'
+import { Main, Header } from '@layout'
 import { useStore } from 'effector-react'
 import { $user } from '@store/user'
 import 'react-toastify/dist/ReactToastify.css'
-import Header from '@layout/Header'
 
 export const routes = {
     home: '/home',

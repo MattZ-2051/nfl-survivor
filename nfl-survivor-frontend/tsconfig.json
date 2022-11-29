@@ -18,9 +18,9 @@
         "baseUrl": ".",
         "paths": {
             "@components/*": ["src/components/*"],
-            "@pages/*": ["src/pages/*"],
+            "@pages": ["src/pages/index.ts"],
             "@utils": ["src/utils/index.ts"],
-            "@layout/*": ["src/layout/*"],
+            "@layout": ["src/layout/index.ts"],
             "@assets/*": ["src/assets/*"],
             "@routes": ["src/routes/index.tsx"],
             "@types/*": ["src/types/*"],
