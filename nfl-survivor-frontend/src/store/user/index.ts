@@ -21,7 +21,6 @@ loginFx.failData.watch((error) => {
 refreshTokenFx.doneData.watch((result) => {
     const tokenData = decodeJwtToken(result.access)
     localStorage.setItem('authTokens', JSON.stringify(result))
-    console.log('res', result)
     updateUser({ username: tokenData.username, authTokens: result })
 })
 
@@ -34,7 +33,7 @@ sessionDeleteFx.doneData.watch(() => {
 
 const updateUser = createEvent<User>()
 const clearStorage = createEvent<void>()
-export const restoreUser = createEvent<User>()
+export const restoreUser = createEvent<void>()
 
 restoreUser.watch(() => {
     const userData = checkStorage()
@@ -46,11 +45,7 @@ restoreUser.watch(() => {
         : clearStorage()
 })
 
-export const $user = createStore<User | null>(
-    localStorage.getItem('authTokens')
-        ? JSON.parse(localStorage.getItem('authTokens') as string)
-        : null
-)
+export const $user = createStore<User | null>(null)
     .on(updateUser, (prevState, payload) => {
         return payload
     })
