@@ -30,7 +30,7 @@ jobs:
                   pip install black
             - name: Run Format
               run: |
-                  python black .
+                  black .
             #   run: |
             #       python ./src/manage.py test
         # - name: Run Tests
