@@ -25,7 +25,6 @@ const PrivateRoute = () => {
 
 const UnauthenticatedRoutes = () => {
     const user = useStore($user)
-    console.log('user', user)
     return !user ? <Outlet /> : <Navigate to="/home" />
 }
 

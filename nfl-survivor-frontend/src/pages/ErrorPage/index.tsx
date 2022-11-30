@@ -5,7 +5,6 @@ import type { PageError } from '@types'
 const ErrorPage: FC = (): JSX.Element => {
     const error = useRouteError()
     const typedError = error as PageError
-    console.log('app error', error)
     return (
         <div>
             <h1>Oops!</h1>
