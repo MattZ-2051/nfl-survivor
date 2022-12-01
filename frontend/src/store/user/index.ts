@@ -49,4 +49,4 @@ export const $user = createStore<User | null>(null)
     .on(updateUser, (prevState, payload) => {
         return payload
     })
-    .reset()
+    .reset(clearStorage)
