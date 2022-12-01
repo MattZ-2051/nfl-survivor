@@ -1,8 +1,10 @@
 import { FC } from 'react'
-import { test } from '@api/user'
 import { Header } from '@layout'
+import { useEvent } from 'effector-react'
+import { getUserProfileFx } from '@api/userProfile'
 
 const Home: FC = (): JSX.Element => {
+    const test = useEvent(getUserProfileFx)
     return (
         <>
             <Header />

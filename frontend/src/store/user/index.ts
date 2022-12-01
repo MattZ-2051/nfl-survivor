@@ -12,7 +12,6 @@ loginFx.doneData.watch((result) => {
 })
 
 loginFx.failData.watch((error) => {
-    console.log('error', error)
     toast.error('Login Error', {
         toastId: 'login-error',
     })
@@ -29,6 +28,7 @@ sessionDeleteFx.doneData.watch(() => {
     toast.success('Logged Out', {
         toastId: 'logged-out',
     })
+    window.location.reload()
 })
 
 const updateUser = createEvent<User>()
@@ -49,4 +49,4 @@ export const $user = createStore<User | null>(null)
     .on(updateUser, (prevState, payload) => {
         return payload
     })
-    .reset(clearStorage)
+    .reset()

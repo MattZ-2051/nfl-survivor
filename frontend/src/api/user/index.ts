@@ -24,6 +24,3 @@ export const refreshTokenFx = createEffect<
     })
     return response.data
 })
-export const test = async () => {
-    return await get('api/test/auth/')
-}

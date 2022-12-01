@@ -1,5 +1,5 @@
-import { restoreUser } from '@store'
-import { useEvent } from 'effector-react'
+import { $user, restoreUser } from '@store'
+import { useEvent, useStore } from 'effector-react'
 import { FC, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -8,7 +8,8 @@ import { useRefreshToken } from '@hooks'
 
 const Main: FC = () => {
     const restoreUserStore = useEvent(restoreUser)
-    useRefreshToken()
+    const user = useStore($user)
+    useRefreshToken(user)
     useEffect(() => {
         restoreUserStore()
     }, [])

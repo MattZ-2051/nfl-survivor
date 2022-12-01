@@ -31,8 +31,8 @@ const UnauthenticatedRoutes = () => {
 export const browserRouter = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element={<Main />}>
-                <Route errorElement={<ErrorPage />}>
+            <Route errorElement={<ErrorPage />}>
+                <Route path="/" element={<Main />}>
                     {/* Public Routes  */}
                     <Route path={'home'} element={<Home />} />
                     {/*  */}
