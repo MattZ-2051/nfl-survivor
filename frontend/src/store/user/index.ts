@@ -3,6 +3,7 @@ import { loginFx, sessionDeleteFx, refreshTokenFx } from '@api/user'
 import { User } from '@types'
 import { checkStorage, decodeJwtToken } from '@utils'
 import { toast } from 'react-toastify'
+import { clearUserProfile } from '../profile'
 
 loginFx.doneData.watch((result) => {
     const tokenData = decodeJwtToken(result.access)
@@ -28,13 +29,15 @@ sessionDeleteFx.doneData.watch(() => {
     toast.success('Logged Out', {
         toastId: 'logged-out',
     })
-    window.location.reload()
 })
 
 const updateUser = createEvent<User>()
-const clearStorage = createEvent<void>()
+export const clearStorage = createEvent<void>()
 export const restoreUser = createEvent<void>()
 
+clearStorage.watch(() => {
+    localStorage.removeItem('authTokens')
+})
 restoreUser.watch(() => {
     const userData = checkStorage()
     userData

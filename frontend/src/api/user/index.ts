@@ -1,6 +1,6 @@
 import { createEffect } from 'effector'
-import type { User, AuthTokens } from '@types'
-import { get, post } from '../index'
+import type { AuthTokens } from '@types'
+import { post } from '../index'
 
 export const loginFx = createEffect<
     { username: string; password: string },
@@ -11,7 +11,6 @@ export const loginFx = createEffect<
 })
 
 export const sessionDeleteFx = createEffect<void, null>(() => {
-    localStorage.removeItem('authTokens')
     return null
 })
 
