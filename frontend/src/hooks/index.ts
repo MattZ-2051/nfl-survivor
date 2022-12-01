@@ -1,4 +1,5 @@
 import { refreshTokenFx } from '@api/user'
+import { getUserProfileFx } from '@api/profile'
 import type { User } from '@types'
 import { useEvent } from 'effector-react'
 import { useEffect } from 'react'
@@ -15,5 +16,15 @@ export const useRefreshToken = async (user: User | null) => {
             }
         }, fourMinutes)
         return () => clearInterval(interval)
+    }, [user])
+}
+
+export const useGetUserProfile = async (user: User | null) => {
+    const getMe = useEvent(getUserProfileFx)
+    useEffect(() => {
+        if (user) {
+            getMe()
+        }
+        return
     }, [user])
 }
