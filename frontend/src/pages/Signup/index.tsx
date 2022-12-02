@@ -1,20 +1,22 @@
 import { FC } from 'react'
 import { Button, Form } from '@components'
-import { loginFx } from '@api/user'
+import { signupFx } from '@api/user'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { routes } from '@routes'
 
-const Login: FC = () => {
-    const login = useEvent(loginFx)
+const Signup: FC = () => {
+    const signup = useEvent(signupFx)
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
-    const userLogin = async () => {
-        if (username && password) {
-            login({
+    const [confirmPassword, setConfirmPassword] = useState<string>()
+    const userSignup = async () => {
+        if (username && password && confirmPassword) {
+            signup({
                 username,
                 password,
+                confirmPassword,
             })
         }
     }
@@ -22,9 +24,9 @@ const Login: FC = () => {
         <div className="w-full h-screen flex items-center justify-center">
             <div className="flex justify-center">
                 <div>
-                    <Form onSubmit={userLogin} method="post">
+                    <Form onSubmit={userSignup} method="post">
                         <p className="text-center text-5xl font-bold mb-10">
-                            Login
+                            Signup
                         </p>
                         <div className="form-floating mb-4 xl:w-96">
                             <input
@@ -55,7 +57,7 @@ const Login: FC = () => {
                                 Username
                             </label>
                         </div>
-                        <div className="form-floating mb-2 xl:w-96">
+                        <div className="form-floating mb-4 xl:w-96">
                             <input
                                 type="password"
                                 className="form-control
@@ -84,17 +86,48 @@ const Login: FC = () => {
                                 Password
                             </label>
                         </div>
+                        <div className="form-floating mb-2 xl:w-96">
+                            <input
+                                type="password"
+                                className="form-control
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="floatingPassword"
+                                placeholder="Confirm Password"
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
+                            />
+                            <label
+                                htmlFor="floatingPassword"
+                                className="text-gray-700"
+                            >
+                                Confirm Password
+                            </label>
+                        </div>
                         <div className="w-full flex text-xs opacity-70 mb-4">
-                            <p>{"Don't have an account?"} </p>
+                            <p>{'Already have an account?'} </p>
                             <Link
                                 className="ml-1 underline hover:text-blue-500"
-                                to={routes.signup}
+                                to={routes.login}
                             >
-                                Signup
+                                Login
                             </Link>
                         </div>
                         <Button
-                            label="Login"
+                            label="Signup"
                             type="primary"
                             form={true}
                             classes="w-full mt-4 text-base"
@@ -106,4 +139,4 @@ const Login: FC = () => {
     )
 }
 
-export default Login
+export default Signup

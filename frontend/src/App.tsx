@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import { browserRouter } from '@routes'
+import { BrowserRouter } from '@routes'
 
 const App: FC = () => {
     return (
         <>
-            <RouterProvider router={browserRouter} />
+            <RouterProvider router={BrowserRouter()} />
         </>
     )
 }

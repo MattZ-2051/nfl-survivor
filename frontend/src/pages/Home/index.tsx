@@ -4,6 +4,7 @@ import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
 import { getUserProfileFx } from '@api/profile'
 import { $profile } from '@store'
+import { signupFx } from '@api/user'
 
 const Home: FC = (): JSX.Element => {
     const test = useEvent(getUserProfileFx)

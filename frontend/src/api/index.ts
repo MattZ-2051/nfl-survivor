@@ -8,14 +8,20 @@ const axiosInstance = axios.create({
     baseURL,
 })
 
+const getHeaders = () => {
+    return $user.getState()
+        ? {
+              headers: {
+                  'Content-Type': 'application/json',
+                  Authorization:
+                      'Bearer ' +
+                      $user.getState()?.authTokens.access.toString(),
+              },
+          }
+        : {}
+}
 export const get = async (path: string, options?: ApiOptions): Promise<any> => {
-    return await axiosInstance.get(path, {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization:
-                'Bearer ' + $user.getState()?.authTokens.access.toString(),
-        },
-    })
+    return await axiosInstance.get(path, getHeaders())
 }
 
 export const post = async (
@@ -23,11 +29,5 @@ export const post = async (
     data: any,
     options?: ApiOptions
 ): Promise<any> => {
-    return await axiosInstance.post(path, data, {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization:
-                'Bearer ' + $user.getState()?.authTokens.access.toString(),
-        },
-    })
+    return await axiosInstance.post(path, data, getHeaders())
 }

@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import UserProfileSerializer
-from survivor.models import UserProfile
+
+from .serializers import user
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -41,5 +41,5 @@ def getRoutes(request):
 @permission_classes([IsAuthenticated])
 def getUserProfiles(request):
     username = request.user
-    serializer = UserProfileSerializer(username, many=False)
+    serializer = user.UserProfileSerializer(username, many=False)
     return Response(serializer.data)
