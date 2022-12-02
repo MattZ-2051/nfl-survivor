@@ -1,14 +1,39 @@
 import { createEvent, createStore } from 'effector'
-import { loginFx, sessionDeleteFx, refreshTokenFx } from '@api/user'
-import { User } from '@types'
+import { loginFx, sessionDeleteFx, refreshTokenFx, signupFx } from '@api/user'
+import type { AuthTokens, User } from '@types'
 import { checkStorage, decodeJwtToken } from '@utils'
 import { toast } from 'react-toastify'
-import { clearUserProfile } from '../profile'
+
+signupFx.doneData.watch((result) => {
+    toast.success('Signup Successful', {
+        toastId: 'signup',
+    })
+    handleUserTokenData(result)
+})
+
+signupFx.failData.watch((error) => {
+    const errorMessages = error.response?.data as {
+        username: string[]
+        password: string[]
+    }
+    if (errorMessages) {
+        if (errorMessages?.password) {
+            toast.error(`Password Error: ${errorMessages.password}`, {
+                toastId: 'password-error',
+            })
+        }
+        if (errorMessages?.username) {
+            toast.error(`Username Error: ${errorMessages.username}`, {
+                toastId: 'username-error',
+            })
+        }
+    } else {
+        toast.error('Signup Error', { toastId: 'signup-error' })
+    }
+})
 
 loginFx.doneData.watch((result) => {
-    const tokenData = decodeJwtToken(result.access)
-    localStorage.setItem('authTokens', JSON.stringify(result))
-    updateUser({ username: tokenData.username, authTokens: result })
+    handleUserTokenData(result)
     toast.success('Logged In', { toastId: 'logged-in' })
 })
 
@@ -19,9 +44,7 @@ loginFx.failData.watch((error) => {
 })
 
 refreshTokenFx.doneData.watch((result) => {
-    const tokenData = decodeJwtToken(result.access)
-    localStorage.setItem('authTokens', JSON.stringify(result))
-    updateUser({ username: tokenData.username, authTokens: result })
+    handleUserTokenData(result)
 })
 
 sessionDeleteFx.doneData.watch(() => {
@@ -38,6 +61,7 @@ export const restoreUser = createEvent<void>()
 clearStorage.watch(() => {
     localStorage.removeItem('authTokens')
 })
+
 restoreUser.watch(() => {
     const userData = checkStorage()
     userData
@@ -47,6 +71,12 @@ restoreUser.watch(() => {
           })
         : clearStorage()
 })
+
+const handleUserTokenData = (result: AuthTokens) => {
+    const tokenData = decodeJwtToken(result.access)
+    localStorage.setItem('authTokens', JSON.stringify(result))
+    updateUser({ username: tokenData.username, authTokens: result })
+}
 
 export const $user = createStore<User | null>(null)
     .on(updateUser, (prevState, payload) => {

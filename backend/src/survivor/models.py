@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User as DjangoUser
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,7 +10,7 @@ class Game(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(DjangoUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     games = models.ForeignKey(
         Game, null=True, on_delete=models.CASCADE, default=None, blank=True
     )
