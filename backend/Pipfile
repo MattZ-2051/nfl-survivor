@@ -21,6 +21,10 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 djangorestframework-simplejwt = "*"
+scrapy = "*"
+scrapyd = "*"
+scrapy-djangoitem = "*"
+python-scrapyd-api = "*"
 
 [dev-packages]
 
