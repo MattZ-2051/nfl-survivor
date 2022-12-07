@@ -25,6 +25,7 @@ scrapy = "*"
 scrapyd = "*"
 scrapy-djangoitem = "*"
 python-scrapyd-api = "*"
+gunicorn = "*"
 
 [dev-packages]
 
