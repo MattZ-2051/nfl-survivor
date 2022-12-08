@@ -1,0 +1,74 @@
+version: '3'
+
+name: survivor-docker
+
+services:
+    db:
+        image: postgres:15
+        restart: always
+        environment:
+            - POSTGRES_HOST_AUTH_METHOD=trust
+            - POSTGRES_DB=survivor
+            - POSTGRES_USER=mattzamora
+        expose:
+            - 5432
+        healthcheck:
+            test:
+                [
+                    'CMD-SHELL',
+                    'pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}',
+                ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        networks:
+            - server-side
+        volumes:
+            - db-data:/var/lib/postgresql/data
+
+    backend:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
+        env_file:
+            - ./backend/.env.development
+        environment:
+            - DB_HOST=db
+        networks:
+            - client-side
+            - server-side
+        entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+        volumes:
+            - static_volume:/app/backend/server/django_static
+        expose:
+            - 8000
+        depends_on:
+            db:
+                condition: service_healthy
+
+    nginx:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        networks:
+            - client-side
+        ports:
+            # in prod use 80:80
+            - 80:80
+        volumes:
+            - static_volume:/app/backend/server/django_static
+            - ./docker/nginx/development:/etc/nginx/conf.d
+        depends_on:
+            - backend
+
+networks:
+    client-side:
+        driver: bridge
+    server-side:
+        driver: bridge
+
+volumes:
+    static_volume: {}
+    db-data: {}

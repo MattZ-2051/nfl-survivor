@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9f6cf738d6cbee86779d5a57871c8e90a818f8ae50df6a77639059e8a5843c65"
+            "sha256": "05a02de96ffda97947c8ee6ad2858a0e701b43ade5f628d84a1290e51bbd843f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1673,6 +1673,14 @@
             "index": "pypi",
             "version": "==1.3.0"
         },
+        "scrapyd-api": {
+            "hashes": [
+                "sha256:393866a7508622997bacbb17112a2d5e5464dde33d4b11dd927841818b6af17e",
+                "sha256:def2543a8c0432dca467e411875fe9b590912b81c1a72f3c0fce16255764cb48"
+            ],
+            "index": "pypi",
+            "version": "==0.0.1"
+        },
         "semantic-version": {
             "hashes": [
                 "sha256:bdabb6d336998cbb378d4b9db3a4b56a1e3235701dc05ea2690d9a997ed5041c",
@@ -1687,6 +1695,13 @@
                 "sha256:f0b0caac3d40627c3c04d7a51b6e06721857a0e10a8775f2d1d7e72901b3a7db"
             ],
             "version": "==21.1.0"
+        },
+        "session-request": {
+            "hashes": [
+                "sha256:6c629d00f5e8fc22bff514b42bdfc69be79c157a8d9a445e240832bd564b5492",
+                "sha256:7d8157e2316b4863cf2a7cf1f575303577d2952da1844fe3bb1fd7668206b4da"
+            ],
+            "version": "==0.0.4"
         },
         "setuptools": {
             "hashes": [
@@ -1740,7 +1755,7 @@
                 "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc",
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
-            "markers": "python_version < '3.11'",
+            "markers": "python_version >= '3.7'",
             "version": "==2.0.1"
         },
         "tomlkit": {
