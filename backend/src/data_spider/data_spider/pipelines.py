@@ -8,8 +8,9 @@
 from itemadapter import ItemAdapter
 import json
 
+
 class DataSpiderPipeline:
-  pass
+    pass
     # def __init__(self, unique_id) -> None:
     #     self.unique_id = unique_id
     #     self.items = []

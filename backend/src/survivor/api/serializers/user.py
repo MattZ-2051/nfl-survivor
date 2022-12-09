@@ -11,8 +11,10 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = ["name"]
 
+
 class UserProfileSerializer(serializers.ModelSerializer):
     games = GameSerializer(many=False)
+
     class Meta:
         model = UserProfile
         fields = ["games"]
@@ -20,7 +22,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class CreateUserProfileSerializer(serializers.ModelSerializer):
-
     username = serializers.CharField(
         min_length=4,
         max_length=20,
