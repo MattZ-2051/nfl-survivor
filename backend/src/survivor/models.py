@@ -12,7 +12,7 @@ class Game(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     games = models.ForeignKey(
         Game, null=True, on_delete=models.CASCADE, default=None, blank=True
     )

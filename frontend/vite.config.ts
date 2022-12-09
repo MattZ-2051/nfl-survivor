@@ -8,6 +8,7 @@ export default defineConfig(() => {
         // vite config
         plugins: [react(), ViteAliases()],
         server: {
+            port: PORT,
             host: '0.0.0.0',
             proxy: {
                 '/api': {

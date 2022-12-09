@@ -4,18 +4,17 @@ import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
 import { getUserProfileFx } from '@api/profile'
 import { $profile } from '@store'
-import { signupFx } from '@api/user'
 
 const Home: FC = (): JSX.Element => {
     const test = useEvent(getUserProfileFx)
     const profile = useStore($profile)
+
     return (
         <>
             <Header />
             <div className="h-screen bg-blue-500">
                 <h1>asdfasdfsdfssd Page</h1>
-                {profile?.games ? <h1>{profile.games[0].name}</h1> : <></>}
-
+                <h1>{profile?.games?.name}</h1>
                 <button onClick={() => test()}>test api</button>
             </div>
         </>
