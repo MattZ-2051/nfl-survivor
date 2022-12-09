@@ -1,15 +1,14 @@
 import { FC } from 'react'
 import { Button } from '@components'
 import { routes } from '@routes'
-import { createStoreConsumer, useEvent, useStore } from 'effector-react'
-import { $profile, $user } from '@store'
+import { createStoreConsumer, useEvent } from 'effector-react'
+import { $user } from '@store'
 import { sessionDeleteFx } from '@api/user'
 
 const HeaderStoreConsumer = createStoreConsumer($user)
 
 const Header: FC = () => {
     const logout = useEvent(sessionDeleteFx)
-    const userProfile = useStore($profile)
     const userLogout = () => {
         logout()
     }

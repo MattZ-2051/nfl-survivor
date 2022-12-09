@@ -7,7 +7,7 @@ getUserProfileFx.doneData.watch((result) => {
     updateUserProfile(result)
 })
 
-getUserProfileFx.failData.watch((error) => {
+getUserProfileFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
     clearUserProfile()
     clearStorage()

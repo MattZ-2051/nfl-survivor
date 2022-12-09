@@ -1,20 +1,25 @@
-from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, password_validation as validators
-from survivor.models import UserProfile
 from django.core import exceptions
+from survivor.models import UserProfile, Game
 
 
-class UserProfileSerializer(ModelSerializer):
+class GameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = ["name"]
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    games = GameSerializer(many=False)
     class Meta:
         model = UserProfile
-        fields = ["user", "games"]
-        read_only_fields = ["user"]
+        fields = ["games"]
+        read_only_fields = ["games"]
 
 
-class CreateUserProfileSerializer(ModelSerializer):
+class CreateUserProfileSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(
         min_length=4,

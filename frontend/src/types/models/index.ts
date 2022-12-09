@@ -13,6 +13,6 @@ export type Game = {
 }
 
 export type Profile = {
-    games: Game[] | null
+    games: Game | null
     // rest of user profile data including groups etc..
 }
