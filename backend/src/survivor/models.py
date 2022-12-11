@@ -7,6 +7,12 @@ from django.utils import timezone
 # Create your models here.
 
 
+class Team(models.Model):
+    scrapy_id = models.CharField(null=False, max_length=5)
+    schedule = models.JSONField(null=False)
+    team_data = models.JSONField(null=True)
+
+
 class Game(models.Model):
     code = models.CharField(null=False, max_length=200)
     name = models.CharField(max_length=20, null=False)

@@ -3,10 +3,12 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy_djangoitem import DjangoItem
+from survivor.models import Team
 
 
-class DataSpiderItem(scrapy.Item):
+class DataSpiderItem(DjangoItem):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    django_model = Team
     pass
