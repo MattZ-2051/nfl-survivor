@@ -3,7 +3,7 @@ import { Button } from '@components'
 import { routes } from '@routes'
 import { createStoreConsumer, useEvent } from 'effector-react'
 import { $user } from '@store'
-import { sessionDeleteFx } from '@api/user'
+import { sessionDeleteFx } from '@api'
 
 const HeaderStoreConsumer = createStoreConsumer($user)
 

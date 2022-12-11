@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector'
-import { getUserProfileFx } from '@api/profile'
+import { getUserProfileFx } from '@api'
 import { Profile } from '@types'
 import { clearStorage } from '../user'
 
