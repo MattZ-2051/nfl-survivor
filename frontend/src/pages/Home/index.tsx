@@ -2,11 +2,12 @@ import { FC } from 'react'
 
 import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
-import { getUserProfileFx } from '@api/profile'
+import { getUserProfileFx, getTeamsFx } from '@api'
 import { $profile } from '@store'
 
 const Home: FC = (): JSX.Element => {
     const test = useEvent(getUserProfileFx)
+    const testCrawl = useEvent(getTeamsFx)
     const profile = useStore($profile)
 
     return (
@@ -16,6 +17,7 @@ const Home: FC = (): JSX.Element => {
                 <h1>asdfasdfsdfssd Page</h1>
                 <h1>{profile?.games?.name}</h1>
                 <button onClick={() => test()}>test api</button>
+                <button onClick={() => testCrawl()}>test crawl</button>
             </div>
         </>
     )

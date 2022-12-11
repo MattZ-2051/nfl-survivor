@@ -4,6 +4,6 @@ pipenv shell
 until
   cd src/data_spider
 do
-  echo "run spider crawl"
+  echo "run spider demon"
 done
-scrapy crawl espn
+scrapyd

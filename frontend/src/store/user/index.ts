@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector'
-import { loginFx, sessionDeleteFx, refreshTokenFx, signupFx } from '@api/user'
+import { loginFx, sessionDeleteFx, refreshTokenFx, signupFx } from '@api'
 import type { AuthTokens, User } from '@types'
 import { checkStorage, decodeJwtToken } from '@utils'
 import { toast } from 'react-toastify'

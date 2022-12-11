@@ -1,5 +1,4 @@
-import { refreshTokenFx } from '@api/user'
-import { getUserProfileFx } from '@api/profile'
+import { refreshTokenFx, getUserProfileFx } from '@api'
 import type { User } from '@types'
 import { useEvent } from 'effector-react'
 import { useEffect } from 'react'

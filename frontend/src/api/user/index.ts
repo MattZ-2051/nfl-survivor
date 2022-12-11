@@ -1,6 +1,6 @@
 import { createEffect } from 'effector'
 import type { AuthTokens } from '@types'
-import { post } from '../index'
+import { post } from '../methods'
 import { AxiosError } from 'axios'
 
 export const signupFx = createEffect<

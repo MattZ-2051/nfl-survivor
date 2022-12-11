@@ -7,8 +7,7 @@ from scrapy_djangoitem import DjangoItem
 from survivor.models import Team
 
 
-class DataSpiderItem(DjangoItem):
+class ScrapyTeamItem(DjangoItem):
     # define the fields for your item here like:
     # name = scrapy.Field()
     django_model = Team
-    pass

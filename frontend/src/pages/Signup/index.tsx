@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Button, Form } from '@components'
-import { signupFx } from '@api/user'
+import { signupFx } from '@api'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
