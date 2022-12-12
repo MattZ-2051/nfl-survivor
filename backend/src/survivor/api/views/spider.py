@@ -45,10 +45,6 @@ def crawl(request):
         "USER_AGENT": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
     }
 
-    task = scrapyd.schedule(
-        "default", "espn", settings=settings
-    )
-    print('task', task)
+    task = scrapyd.schedule("default", "espn", settings=settings)
     job_status = scrapyd.list_jobs("default")
-    print("status", job_status)
     return Response("crawling")

@@ -8,6 +8,4 @@ from survivor.models import Team
 
 
 class ScrapyTeamItem(DjangoItem):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     django_model = Team
