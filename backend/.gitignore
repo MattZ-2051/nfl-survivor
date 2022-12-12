@@ -8,3 +8,4 @@ reports/
 .env.development
 settings.py
 migrations
+django_settings.py
