@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { ErrorPage } from '@pages'
-import { Home, Groups, Login, Signup } from '@pages'
+import { Home, Games, Login, Signup } from '@pages'
 import { Main } from '@layout'
 import { useStore } from 'effector-react'
 import { $user } from '@store'
@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export const routes = {
     home: '/home',
-    groups: '/groups',
+    games: '/games',
     login: '/login',
     signup: '/signup',
 }
@@ -40,7 +40,7 @@ export const BrowserRouter = () =>
                         {/*  */}
                         {/* Private Routes  */}
                         <Route path="/" element={<PrivateRoute />}>
-                            <Route path={routes.groups} element={<Groups />} />
+                            <Route path={routes.games} element={<Games />} />
                         </Route>
                         {/*  */}
                         {/* Routes that Can't be accessed if logged in  */}

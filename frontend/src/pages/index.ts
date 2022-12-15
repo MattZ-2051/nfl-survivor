@@ -1,6 +1,6 @@
 import Home from './Home'
 import Login from './Login'
-import Groups from './Groups'
+import Games from './Games'
 import ErrorPage from './ErrorPage'
 import Signup from './Signup'
-export { Home, Login, Groups, ErrorPage, Signup }
+export { Home, Login, Games, ErrorPage, Signup }

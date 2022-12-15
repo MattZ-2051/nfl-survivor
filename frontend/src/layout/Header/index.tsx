@@ -40,8 +40,8 @@ const Header: FC = () => {
                                 <div>
                                     <Button
                                         type="outlined"
-                                        label="Groups"
-                                        redirectTo={routes.groups}
+                                        label="Games"
+                                        redirectTo={routes.games}
                                     />
                                 </div>
                                 {user ? (

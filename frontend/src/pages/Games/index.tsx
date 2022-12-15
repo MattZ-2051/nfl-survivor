@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const Groups: FC = () => {
+const Games: FC = () => {
     return (
         <div>
             <h1>Group Page</h1>
@@ -8,4 +8,4 @@ const Groups: FC = () => {
     )
 }
 
-export default Groups
+export default Games
