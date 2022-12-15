@@ -3,13 +3,8 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, password_validation as validators
 from django.core import exceptions
-from survivor.models import UserProfile, Game
-
-
-class GameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Game
-        fields = ["name"]
+from survivor.models import UserProfile
+from .game import GameSerializer
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
