@@ -7,9 +7,11 @@ from .views import (
     user as user_view,
     spider as spider_view,
     team as team_view,
+    game as game_view,
 )
 
 urlpatterns = [
+    path("games/", game_view.getGames, name="games"),
     path("teams/", team_view.getTeams, name="teams"),
     path("users/me", user_view.getUserProfiles, name="get_me"),
     path("auth/signup", auth_view.signup, name="signup"),

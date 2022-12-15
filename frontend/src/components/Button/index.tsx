@@ -6,7 +6,7 @@ import clsx from 'clsx'
 interface IProps {
     type: ButtonType
     onClick?: () => void | undefined
-    classes?: string
+    className?: string
     label: string
     redirectTo?: string
     form?: boolean
@@ -25,7 +25,7 @@ const Button: FC<IProps> = ({
     label,
     type,
     onClick,
-    classes,
+    className,
     redirectTo,
     form,
 }) => {
@@ -35,7 +35,7 @@ const Button: FC<IProps> = ({
                 type="button"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
-                className={clsx(buttonTypeMap[type].class, classes)}
+                className={clsx(buttonTypeMap[type].class, className)}
                 to={redirectTo}
             >
                 {label}
@@ -47,7 +47,7 @@ const Button: FC<IProps> = ({
             type={form ? 'submit' : 'button'}
             data-mdb-ripple="true"
             data-mdb-ripple-color="light"
-            className={clsx(buttonTypeMap[type].class, classes)}
+            className={clsx(buttonTypeMap[type].class, className)}
             onClick={onClick}
         >
             {label}
