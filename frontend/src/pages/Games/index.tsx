@@ -4,6 +4,7 @@ import { useStore } from 'effector-react'
 import { $profile } from '@store'
 
 import CreateGame from './components/CreateGame'
+
 const Games: FC = () => {
     const profile = useStore($profile)
 
