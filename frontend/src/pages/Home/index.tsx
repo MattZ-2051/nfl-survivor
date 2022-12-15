@@ -3,12 +3,15 @@ import { FC } from 'react'
 import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
 import { getUserProfileFx, getTeamsFx } from '@api'
-import { $profile } from '@store'
+import { $profile, $teams } from '@store'
 
 const Home: FC = (): JSX.Element => {
     const test = useEvent(getUserProfileFx)
     const testCrawl = useEvent(getTeamsFx)
     const profile = useStore($profile)
+    const teams = useStore($teams)
+
+    console.log('teams', teams)
 
     return (
         <>
