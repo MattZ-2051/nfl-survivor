@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import json
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MinLengthValidator
 
 # Create your models here.
 
@@ -14,7 +15,12 @@ class Team(models.Model):
 
 
 class Game(models.Model):
-    code = models.CharField(null=False, max_length=200)
+    code = models.CharField(
+        null=False,
+        max_length=4,
+        unique=True,
+        validators=[MinLengthValidator(4, "this field requires 4 characters exactly")],
+    )
     name = models.CharField(max_length=20, null=False)
 
 

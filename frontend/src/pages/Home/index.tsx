@@ -1,26 +1,22 @@
 import { FC } from 'react'
 
 import { Header } from '@layout'
-import { useEvent, useStore } from 'effector-react'
-import { getUserProfileFx, getTeamsFx } from '@api'
-import { $profile, $teams } from '@store'
+import { useEvent } from 'effector-react'
+import { getUserProfileFx, getTeamsFx, getGamesFx } from '@api'
 
 const Home: FC = (): JSX.Element => {
     const test = useEvent(getUserProfileFx)
     const testCrawl = useEvent(getTeamsFx)
-    const profile = useStore($profile)
-    const teams = useStore($teams)
-
-    console.log('teams', teams)
+    const testTeams = useEvent(getGamesFx)
 
     return (
         <>
             <Header />
-            <div className="h-screen bg-blue-500">
+            <div>
                 <h1>asdfasdfsdfssd Page</h1>
-                <h1>{profile?.games?.name}</h1>
                 <button onClick={() => test()}>test api</button>
                 <button onClick={() => testCrawl()}>test crawl</button>
+                <button onClick={() => testTeams()}>test teams</button>
             </div>
         </>
     )

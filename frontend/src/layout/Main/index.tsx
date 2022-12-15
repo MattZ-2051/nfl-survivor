@@ -16,7 +16,7 @@ const Main: FC = () => {
     }, [])
 
     return (
-        <div className="w-full h-screen" id="detail">
+        <div className="w-full min-h-screen bg-blue-600" id="detail">
             <ToastContainer position="top-center" pauseOnHover={false} />
             <Outlet />
         </div>

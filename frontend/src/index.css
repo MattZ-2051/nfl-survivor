@@ -54,3 +54,7 @@
 body {
     color: black;
 }
+
+h1 {
+    @apply text-3xl font-semibold;
+}

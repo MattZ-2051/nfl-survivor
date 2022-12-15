@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Button, Form } from '@components'
+import { Button, Form, Input } from '@components'
 import { loginFx } from '@api'
 import { useEvent } from 'effector-react'
 import { useState } from 'react'
@@ -20,69 +20,29 @@ const Login: FC = () => {
     }
     return (
         <div className="w-full h-screen flex items-center justify-center">
-            <div className="flex justify-center">
+            <div className="flex justify-center bg-white p-12 rounded-lg">
                 <div>
                     <Form onSubmit={userLogin} method="post">
-                        <p className="text-center text-5xl font-bold mb-10">
+                        <p className="text-center text-5xl font-bold mb-16">
                             Login
                         </p>
-                        <div className="form-floating mb-4 xl:w-96">
-                            <input
+                        <div className="form-floating mb-6 xl:w-96">
+                            <Input
+                                id="floatingUsername"
+                                placeHolder="Username"
                                 type="text"
-                                className="form-control
-                                        block
-                                        w-full
-                                        px-3
-                                        py-1.5
-                                        text-base
-                                        font-normal
-                                        text-gray-700
-                                        bg-white bg-clip-padding
-                                        border border-solid border-gray-300
-                                        rounded
-                                        transition
-                                        ease-in-out
-                                        m-0
-                                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="floatingInput"
-                                placeholder="user123"
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={setUsername}
+                                label="Username"
                             />
-                            <label
-                                htmlFor="floatingInput"
-                                className="text-gray-700"
-                            >
-                                Username
-                            </label>
                         </div>
                         <div className="form-floating mb-2 xl:w-96">
-                            <input
-                                type="password"
-                                className="form-control
-      block
-      w-full
-      px-3
-      py-1.5
-      text-base
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding
-      border border-solid border-gray-300
-      rounded
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            <Input
                                 id="floatingPassword"
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                placeHolder="Password"
+                                type="password"
+                                onChange={setPassword}
+                                label="Password"
                             />
-                            <label
-                                htmlFor="floatingPassword"
-                                className="text-gray-700"
-                            >
-                                Password
-                            </label>
                         </div>
                         <div className="w-full flex text-xs opacity-70 mb-4">
                             <p>{"Don't have an account?"} </p>
@@ -97,7 +57,7 @@ const Login: FC = () => {
                             label="Login"
                             type="primary"
                             form={true}
-                            classes="w-full mt-4 text-base"
+                            className="w-full mt-12 text-base"
                         />
                     </Form>
                 </div>
