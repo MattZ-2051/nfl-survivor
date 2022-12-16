@@ -5,12 +5,10 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 import json
 from .items import ScrapyTeamItem
 from asgiref.sync import sync_to_async
 from .utils import item_to_model, get_or_create, update_model
-from django.forms.models import model_to_dict
 
 
 class TeamPipeline:
