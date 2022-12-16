@@ -4,16 +4,26 @@ interface IProps {
     onChange: (value: string) => void
     label: string
     id: string
-    type: 'text' | 'password'
+    type: 'text' | 'password' | 'number'
     placeHolder: string
+    maxLength?: number
 }
 
-const Input: FC<IProps> = ({ onChange, label, id, type, placeHolder }) => {
+const Input: FC<IProps> = ({
+    onChange,
+    label,
+    id,
+    type,
+    placeHolder,
+    maxLength,
+}) => {
     return (
         <>
-            <input
-                type={type}
-                className="form-control
+            <div className="form-floating">
+                <input
+                    type={type}
+                    maxLength={maxLength}
+                    className="form-control
 block
 w-full
 px-3
@@ -28,13 +38,14 @@ transition
 ease-in-out
 m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id={id}
-                placeholder={placeHolder}
-                onChange={(e) => onChange(e.target.value)}
-            />
-            <label htmlFor={id} className="text-gray-700">
-                {label}
-            </label>
+                    id={id}
+                    placeholder={placeHolder}
+                    onChange={(e) => onChange(e.target.value)}
+                />
+                <label htmlFor={id} className="text-gray-700">
+                    {label}
+                </label>
+            </div>
         </>
     )
 }

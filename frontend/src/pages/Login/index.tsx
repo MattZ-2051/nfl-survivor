@@ -26,7 +26,7 @@ const Login: FC = () => {
                         <p className="text-center text-5xl font-bold mb-16">
                             Login
                         </p>
-                        <div className="form-floating mb-6 xl:w-96">
+                        <div className="mb-6 xl:w-96">
                             <Input
                                 id="floatingUsername"
                                 placeHolder="Username"
@@ -35,7 +35,7 @@ const Login: FC = () => {
                                 label="Username"
                             />
                         </div>
-                        <div className="form-floating mb-2 xl:w-96">
+                        <div className="mb-2 xl:w-96">
                             <Input
                                 id="floatingPassword"
                                 placeHolder="Password"

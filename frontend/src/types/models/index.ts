@@ -9,6 +9,7 @@ export type User = {
 }
 
 export type Game = {
+    id: string
     name: string
 }
 
