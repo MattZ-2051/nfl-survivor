@@ -8,7 +8,7 @@ export const signupFx = createEffect<
     AuthTokens,
     AxiosError
 >(async ({ username, password, confirmPassword }) => {
-    const response = await post('/api/auth/signup', {
+    const response = await post('/api/auth/signup/', {
         username,
         password,
         confirmPassword,
@@ -21,7 +21,7 @@ export const loginFx = createEffect<
     AuthTokens,
     AxiosError
 >(async ({ username, password }) => {
-    const response = await post('/api/auth/token', { username, password })
+    const response = await post('/api/auth/token/', { username, password })
     return response.data
 })
 
@@ -34,7 +34,7 @@ export const refreshTokenFx = createEffect<
     AuthTokens,
     AxiosError
 >(async ({ refreshToken }) => {
-    const response = await post('/api/auth/token/refresh', {
+    const response = await post('/api/auth/token/refresh/', {
         refresh: refreshToken,
     })
     return response.data

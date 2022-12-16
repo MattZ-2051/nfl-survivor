@@ -7,10 +7,18 @@ interface IProps {
     open: boolean
     setOpen: (open: boolean) => void
     title: string
-    subText?: string
     buttonTitle: string
+    onSubmit: () => void
+    children: React.ReactNode
 }
-const Modal: FC<IProps> = ({ open, setOpen, title, subText, buttonTitle }) => {
+const Modal: FC<IProps> = ({
+    open,
+    setOpen,
+    title,
+    buttonTitle,
+    onSubmit,
+    children,
+}) => {
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog
@@ -58,21 +66,15 @@ const Modal: FC<IProps> = ({ open, setOpen, title, subText, buttonTitle }) => {
             sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                         >
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div className="sm:flex sm:items-start">
-                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <div className="sm:flex sm:items-start w-full">
+                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                                         <Dialog.Title
                                             as="h3"
-                                            className="text-lg leading-6 font-medium text-gray-900"
+                                            className="text-2xl leading-6 font-medium text-gray-900"
                                         >
                                             {title}
                                         </Dialog.Title>
-                                        {subText && (
-                                            <div className="mt-2">
-                                                <p className="text-sm text-gray-500">
-                                                    {subText}
-                                                </p>
-                                            </div>
-                                        )}
+                                        {children}
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +82,7 @@ const Modal: FC<IProps> = ({ open, setOpen, title, subText, buttonTitle }) => {
                                 <Button
                                     label={buttonTitle}
                                     type="primary"
-                                    onClick={() => setOpen(false)}
+                                    onClick={onSubmit}
                                     className="w-full inline-flex justify-center rounded-md
                                     shadow-sm px-4 py-2
                                      text-base font-medium text-white
