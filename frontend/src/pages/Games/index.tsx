@@ -9,7 +9,6 @@ import ActiveGames from './components/ActiveGames'
 const Games: FC = () => {
     const profile = useStore($profile)
 
-    console.log('here', profile?.games)
     return (
         <>
             <Header />
