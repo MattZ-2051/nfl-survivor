@@ -8,7 +8,7 @@ from ..serializers.team import TeamSerializer
 
 @api_view(["GET"])
 @permission_classes([AllowAny])
-def getTeams(request):
+def get_teams(request):
     queryset = Team.objects.all()
     serializer = TeamSerializer(queryset, many=True)
     return Response({"teams": serializer.data})

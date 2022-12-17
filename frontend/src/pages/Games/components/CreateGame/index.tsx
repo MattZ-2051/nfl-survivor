@@ -68,8 +68,6 @@ const CreateGame: FC = () => {
             </Modal>
             <h1 className="text-white py-8">Or</h1>
             <h1 className="text-white pb-8">Find a Game</h1>
-
-            <ActiveGames />
             {/* <div className="bg-white p-12">
                 <h1 className="">Create Game</h1>
             </div> */}

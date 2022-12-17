@@ -11,10 +11,11 @@ from .views import (
 )
 
 urlpatterns = [
-    path("games/create/", game_view.createGame, name="create_game"),
-    path("games/", game_view.getGames, name="games"),
-    path("teams/", team_view.getTeams, name="teams"),
-    path("users/me/", user_view.getUserProfiles, name="get_me"),
+    path("games/<int:game_id>/", game_view.get_users_in_game),
+    path("games/create/", game_view.create_games, name="create_game"),
+    path("games/", game_view.get_games, name="games"),
+    path("teams/", team_view.get_teams, name="teams"),
+    path("users/me/", user_view.get_user_profile, name="get_me"),
     path("auth/signup/", auth_view.signup, name="signup"),
     path("crawl/", spider_view.crawl, name="crawl"),
     path(

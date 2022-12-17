@@ -4,16 +4,18 @@ import { useStore } from 'effector-react'
 import { $profile } from '@store'
 
 import CreateGame from './components/CreateGame'
+import ActiveGames from './components/ActiveGames'
 
 const Games: FC = () => {
     const profile = useStore($profile)
 
+    console.log('here', profile?.games)
     return (
         <>
             <Header />
             <div className="w-full h-full flex justify-center items-center">
                 {profile?.games ? (
-                    <h1>Active Games</h1>
+                    <ActiveGames game={profile.games} />
                 ) : (
                     <div className="p-12">
                         <h1 className="text-white text-center">

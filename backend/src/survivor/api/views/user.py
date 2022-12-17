@@ -9,7 +9,7 @@ from ..serializers.user import UserProfileSerializer
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def getUserProfiles(request):
+def get_user_profile(request):
     username = request.user
     user_instance = User.objects.get(username=username)
     profile = UserProfile.objects.get(user=user_instance)
