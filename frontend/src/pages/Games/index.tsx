@@ -26,7 +26,7 @@ const Games: FC = () => {
                         <ActiveGames game={gameProfile.game} />
                     ) : (
                         <div className="p-12">
-                            <h1 className="text-white text-center">
+                            <h1 className="text-white text-center text-4xl">
                                 {"Looks like you don't have any active games!"}
                             </h1>
                             <CreateGame />

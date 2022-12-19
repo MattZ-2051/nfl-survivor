@@ -1,15 +1,18 @@
-import { FC, useState } from 'react'
-import { Button, Input, Modal } from '@components'
+import { FC, useEffect, useState } from 'react'
+import { Button, Input, Modal, Table } from '@components'
 import ActiveGames from '../ActiveGames'
-import { useEvent } from 'effector-react'
-import { createGameFx } from '@api'
+import { useEvent, useStore } from 'effector-react'
+import { createGameFx, getGamesFx } from '@api'
 import { toast } from 'react-toastify'
+import { $games } from '@store'
 
 const CreateGame: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [code, setCode] = useState<string>()
     const [name, setName] = useState<string>()
     const createGame = useEvent(createGameFx)
+    const getGames = useEvent(getGamesFx)
+    const games = useStore($games)
 
     const handleCreateGame = () => {
         if (code && name) {
@@ -23,6 +26,10 @@ const CreateGame: FC = () => {
             toast.error('Fill out all required fields')
         }
     }
+
+    useEffect(() => {
+        getGames()
+    }, [])
 
     return (
         <div className="w-full h-full flex justify-center items-center flex-col">
@@ -66,11 +73,19 @@ const CreateGame: FC = () => {
                     </div>
                 </div>
             </Modal>
-            <h1 className="text-white py-8">Or</h1>
-            <h1 className="text-white pb-8">Find a Game</h1>
-            {/* <div className="bg-white p-12">
-                <h1 className="">Create Game</h1>
-            </div> */}
+            <h1 className="text-white py-8 text-4xl">Or</h1>
+            <h1 className="text-white pb-8 text-4xl">Find a Game to join</h1>
+            {games && (
+                <Table
+                    headers={['Game Name', 'Joinable']}
+                    body={[
+                        ...games.map((game) => [
+                            game.name,
+                            game.active ? 'No' : 'Yes',
+                        ]),
+                    ]}
+                />
+            )}
         </div>
     )
 }
