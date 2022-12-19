@@ -44,7 +44,9 @@ def create_games(request):
         profile = UserProfile.objects.get(user=request.user)
         new_game_instance = Game.objects.get(id=new_game.data["id"])
         try:
-            GameProfile.objects.create(user=profile, game=new_game_instance)
+            GameProfile.objects.create(
+                user=profile, game=new_game_instance, is_owner=True
+            )
         except Exception as _:
             Response(
                 {"error": "error creating game"},

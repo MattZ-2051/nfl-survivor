@@ -48,6 +48,7 @@ class GameProfile(models.Model):
     )
     is_loser = models.BooleanField(default=False, null=False)
     is_winner = models.BooleanField(default=False, null=False)
+    is_owner = models.BooleanField(default=False, null=False)
 
 
 class ScrapyItem(models.Model):
