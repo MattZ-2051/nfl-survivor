@@ -22,24 +22,18 @@ const ActiveGames: FC<IProps> = ({ game }) => {
     }
     useEffect(() => {
         if (game?.id) {
-            fetchUsers(Number.parseInt(game.id, 10)).then((res) => {
-                console.log('res', res)
+            fetchUsers(game.id).then((res) => {
                 if (res?.users) {
                     setGameUsers(res.users)
                 }
             })
         }
-    }, [game])
+    }, [game?.id])
 
     return (
         <>
-            <h1>{game.name}</h1>
-            <h1>Players</h1>
-            {gameUsers
-                ? gameUsers.map((user, index) => {
-                      return <p key={index}>{user}</p>
-                  })
-                : null}
+            <h1>Active Games</h1>
+            <p>{game.name}</p>
         </>
     )
 }

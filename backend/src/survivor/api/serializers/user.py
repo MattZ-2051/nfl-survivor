@@ -8,12 +8,12 @@ from .game import GameSerializer
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    games = GameSerializer(many=False)
+    game_invites = GameSerializer(many=False)
 
     class Meta:
         model = UserProfile
-        fields = ["games"]
-        read_only_fields = ["games"]
+        fields = ["game_invites"]
+        read_only_fields = ["game_invites"]
 
 
 class CreateUserProfileSerializer(serializers.ModelSerializer):

@@ -1,14 +1,14 @@
 import { getTeamsFx } from '@api'
 import { Team } from '@types'
 import { createEvent, createStore } from 'effector'
+import { toast } from 'react-toastify'
 
 getTeamsFx.doneData.watch((result) => {
     updateTeams(result.teams)
 })
 
 getTeamsFx.failData.watch((error) => {
-    // logs user out and clears data if there is an error with the token
-    console.log('error', error)
+    toast.error('Error getting teams', { toastId: 'get-teams-error' })
 })
 
 const updateTeams = createEvent<Team[]>()

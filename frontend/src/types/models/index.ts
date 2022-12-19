@@ -9,12 +9,23 @@ export type User = {
 }
 
 export type Game = {
-    id: string
+    id: number
     name: string
+    current_week: number
+    active: boolean
+}
+
+export type GameProfile = {
+    game: Game
+    user: string
+    currentPick: Team | null
+    prevPicks: Team[] | null
+    isLoser: boolean
+    is_winner: boolean
 }
 
 export type Profile = {
-    games: Game | null
+    game_invites: Game | null
     // rest of user profile data including groups etc..
 }
 
