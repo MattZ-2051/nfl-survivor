@@ -8,11 +8,15 @@ from .views import (
     spider as spider_view,
     team as team_view,
     game as game_view,
+    game_profile as game_profile_view,
 )
 
 urlpatterns = [
-    path("games/<int:game_id>/", game_view.get_users_in_game),
+    path("games/<int:game_id>/users/", game_view.get_users_in_game),
     path("games/create/", game_view.create_games, name="create_game"),
+    path(
+        "games/profile/", game_profile_view.get_user_game_profiles, name="game_profiles"
+    ),
     path("games/", game_view.get_games, name="games"),
     path("teams/", team_view.get_teams, name="teams"),
     path("users/me/", user_view.get_user_profile, name="get_me"),

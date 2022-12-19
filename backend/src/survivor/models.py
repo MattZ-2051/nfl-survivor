@@ -1,9 +1,8 @@
-from django.db import models
-from django.contrib.auth.models import User
 import json
-from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MinLengthValidator
+from django.db import models
 
 # Create your models here.
 
@@ -22,13 +21,33 @@ class Game(models.Model):
         validators=[MinLengthValidator(4, "this field requires 4 characters exactly")],
     )
     name = models.CharField(max_length=20, null=False)
+    active = models.BooleanField(default=False, null=False, blank=True)
+    current_week = models.IntegerField(default=0, null=False, blank=True)
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    games = models.ForeignKey(
-        Game, null=True, on_delete=models.CASCADE, default=None, blank=True
+    game_invites = models.ForeignKey(
+        Game, on_delete=models.CASCADE, default=None, null=True, blank=True
     )
+
+
+class GameProfile(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    current_pick = models.OneToOneField(
+        Team,
+        on_delete=models.CASCADE,
+        related_name="current_pick",
+        null=True,
+        default=None,
+        blank=True,
+    )
+    prev_picks = models.ManyToManyField(
+        Team, related_name="prev_picks", null=True, default=None, blank=True
+    )
+    is_loser = models.BooleanField(default=False, null=False)
+    is_winner = models.BooleanField(default=False, null=False)
 
 
 class ScrapyItem(models.Model):
