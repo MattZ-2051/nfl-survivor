@@ -1,9 +1,5 @@
-import { FC, useEffect, useState } from 'react'
-import { useEvent } from 'effector-react'
-
-import { getUsersInGameFx } from '@api'
+import { FC } from 'react'
 import { Game } from '@types'
-import { toast } from 'react-toastify'
 
 interface IProps {
     game: Game

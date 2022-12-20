@@ -7,7 +7,7 @@ getGamesFx.doneData.watch((result) => {
     updateGames(result.games)
 })
 
-getGamesFx.failData.watch((error) => {
+getGamesFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
     toast.error('Error getting games', { toastId: 'get-games-error' })
 })

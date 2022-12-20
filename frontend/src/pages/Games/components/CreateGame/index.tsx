@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { Button, Input, Modal, Table } from '@components'
 import ActiveGames from '../ActiveGames'
-import { useEvent, useStore } from 'effector-react'
-import { createGameFx, getGamesFx } from '@api'
+import { useEvent } from 'effector-react'
+import { createGameFx } from '@api'
 import { toast } from 'react-toastify'
-import { $games } from '@store'
+import { Game } from '@types'
 
-const CreateGame: FC = () => {
+interface IProps {
+    games: Game[] | null
+}
+const CreateGame: FC<IProps> = ({ games }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [code, setCode] = useState<string>()
     const [name, setName] = useState<string>()
     const createGame = useEvent(createGameFx)
-    const getGames = useEvent(getGamesFx)
-    const games = useStore($games)
 
     const handleCreateGame = () => {
         if (code && name) {
@@ -26,10 +27,6 @@ const CreateGame: FC = () => {
             toast.error('Fill out all required fields')
         }
     }
-
-    useEffect(() => {
-        getGames()
-    }, [])
 
     return (
         <div className="w-full h-full flex justify-center items-center flex-col">
@@ -84,6 +81,7 @@ const CreateGame: FC = () => {
                             game.active ? 'No' : 'Yes',
                         ]),
                     ]}
+                    games={games}
                 />
             )}
         </div>
