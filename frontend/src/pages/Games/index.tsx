@@ -1,20 +1,24 @@
 import { FC, useEffect, useState } from 'react'
 import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
-import { $profile, $gameProfile } from '@store'
+import { $gameProfile, $games } from '@store'
 
 import CreateGame from './components/CreateGame'
 import ActiveGames from './components/ActiveGames'
-import { getGameProfileFx } from '@api'
+import { getGameProfileFx, getGamesFx } from '@api'
 
 const Games: FC = () => {
     const gameProfile = useStore($gameProfile)
-    const getGames = useEvent(getGameProfileFx)
+    const getGameProfile = useEvent(getGameProfileFx)
+    const getGames = useEvent(getGamesFx)
     const [loading, setLoading] = useState<boolean>(false)
+    const games = useStore($games)
 
     useEffect(() => {
         setLoading(true)
-        getGames().finally(() => setLoading(false))
+        Promise.all([getGames(), getGameProfile()]).finally(() =>
+            setLoading(false)
+        )
     }, [])
 
     return (
@@ -25,12 +29,16 @@ const Games: FC = () => {
                     {gameProfile ? (
                         <ActiveGames game={gameProfile.game} />
                     ) : (
-                        <div className="p-12">
-                            <h1 className="text-white text-center text-4xl">
-                                {"Looks like you don't have any active games!"}
-                            </h1>
-                            <CreateGame />
-                        </div>
+                        games && (
+                            <div className="p-12">
+                                <h1 className="text-white text-center text-4xl">
+                                    {
+                                        "Looks like you don't have any active games!"
+                                    }
+                                </h1>
+                                <CreateGame games={games} />
+                            </div>
+                        )
                     )}
                 </div>
             )}

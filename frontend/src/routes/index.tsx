@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { ErrorPage } from '@pages'
-import { Home, Games, Login, Signup } from '@pages'
+import { Home, Games, Login, Signup, GameDetail } from '@pages'
 import { Main } from '@layout'
 import { useStore } from 'effector-react'
 import { $user } from '@store'
@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css'
 export const routes = {
     home: '/home',
     games: '/games',
+    gameId: '/games/:gameId',
     login: '/login',
     signup: '/signup',
 }
@@ -36,24 +37,33 @@ export const BrowserRouter = () =>
                 <Route errorElement={<ErrorPage />}>
                     <Route path="/" element={<Main />}>
                         {/* Public Routes  */}
-                        <Route path={'home'} element={<Home />} />
+                        <Route path={routes.home} element={<Home />} />
                         {/*  */}
+
                         {/* Private Routes  */}
                         <Route path="/" element={<PrivateRoute />}>
-                            <Route path={routes.games} element={<Games />} />
+                            <Route
+                                path={routes.games}
+                                element={<Games />}
+                            ></Route>
+                            <Route
+                                path={routes.gameId}
+                                element={<GameDetail />}
+                            />
                         </Route>
                         {/*  */}
+
                         {/* Routes that Can't be accessed if logged in  */}
                         <Route path="/" element={<UnauthenticatedRoutes />}>
                             <Route
                                 path={routes.login}
                                 element={<Login />}
-                                action={() => {}}
+                                action={() => null}
                             />
                             <Route
                                 path={routes.signup}
                                 element={<Signup />}
-                                action={() => {}}
+                                action={() => null}
                             />
                         </Route>
 

@@ -1,5 +1,5 @@
 import { createEffect } from 'effector'
-import { Game, Profile } from '@types'
+import { Game } from '@types'
 import { get, post } from '../methods'
 import { AxiosError } from 'axios'
 
@@ -9,6 +9,15 @@ export const getGamesFx = createEffect<void, { games: Game[] }, AxiosError>(
         return response.data
     }
 )
+
+export const getSingleGameFx = createEffect<
+    { gameId: number },
+    { game: Game[] },
+    AxiosError
+>(async ({ gameId }) => {
+    const response = await get(`/api/games/${gameId}`)
+    return response.data
+})
 
 export const getUsersInGameFx = createEffect<
     { gameId: number },

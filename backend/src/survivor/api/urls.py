@@ -13,6 +13,7 @@ from .views import (
 
 urlpatterns = [
     path("games/<int:game_id>/users/", game_view.get_users_in_game),
+    path("games/<int:game_id>/", game_view.get_single_game, name="game"),
     path("games/create/", game_view.create_games, name="create_game"),
     path(
         "games/profile/", game_profile_view.get_user_game_profiles, name="game_profiles"

@@ -35,6 +35,14 @@ def get_users_in_game(request, game_id):
     return Response({"users": results})
 
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_single_game(request, game_id):
+    game = Game.objects.get(id=game_id)
+    serializer = GameSerializer(game, many=False)
+    return Response({"game": serializer.data})
+
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_games(request):
