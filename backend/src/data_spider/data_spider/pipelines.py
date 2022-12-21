@@ -37,23 +37,25 @@ class TeamPipeline:
                 "result": "bye",
                 "score": "bye",
             }
-
-            for index, item in enumerate(schedule):
-                if item["week"] == "bye":
-                    return
-                if index == bye_week_index:
-                    new_schedule.append(bye_week)
-                    item["week"] = str(int(item["week"]) + 1)
-                    new_schedule.append(item)
-                elif index < bye_week_index:
-                    new_schedule.append(item)
-                elif index > bye_week_index:
-                    item["week"] = str(int(item["week"]) + 1)
-                    new_schedule.append(item)
-            new_team = ScrapyTeamItem()
-            new_team["scrapy_id"] = team_id
-            new_team["schedule"] = json.dumps(new_schedule)
-            team_model = item_to_model(new_team)
-            new_model, created = get_or_create(team_model)
-            update_model(new_model, team_model)
+            if any(week["team"] == "bye" for week in schedule):
+                return data
+            else:
+                for index, item in enumerate(schedule):
+                    if item["week"] == "bye":
+                        return
+                    if index == bye_week_index:
+                        new_schedule.append(bye_week)
+                        item["week"] = str(int(item["week"]) + 1)
+                        new_schedule.append(item)
+                    elif index < bye_week_index:
+                        new_schedule.append(item)
+                    elif index > bye_week_index:
+                        item["week"] = str(int(item["week"]) + 1)
+                        new_schedule.append(item)
+                new_team = ScrapyTeamItem()
+                new_team["scrapy_id"] = team_id
+                new_team["schedule"] = json.dumps(new_schedule)
+                team_model = item_to_model(new_team)
+                new_model, created = get_or_create(team_model)
+                update_model(new_model, team_model)
         return data

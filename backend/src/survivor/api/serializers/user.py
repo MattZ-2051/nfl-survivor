@@ -7,13 +7,20 @@ from survivor.models import UserProfile
 from .game import GameSerializer
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+      model = User
+      fields = ["username"]
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     game_invites = GameSerializer(many=False)
+    user = UserSerializer(many=False)
 
     class Meta:
         model = UserProfile
-        fields = ["game_invites"]
-        read_only_fields = ["game_invites"]
+        fields = "__all__"
+
 
 
 class CreateUserProfileSerializer(serializers.ModelSerializer):

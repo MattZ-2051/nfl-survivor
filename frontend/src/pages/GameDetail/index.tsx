@@ -13,9 +13,14 @@ const GameDetail: FC = () => {
             window.location.pathname.split('/')[2],
             10
         )
-        Promise.all([getGame({ gameId }), getUsers({ gameId })]).finally(() =>
-            setLoading(false)
-        )
+
+        ;(async () => {
+            const [{ game }, { users }] = await Promise.all([
+                getGame({ gameId }),
+                getUsers({ gameId }),
+            ]).finally(() => setLoading(false))
+            console.log('info', game, users)
+        })()
     }, [])
     return (
         <>
