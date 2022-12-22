@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Form as RouterForm, FormMethod } from 'react-router-dom'
 
 interface IProps {
-    children: JSX.Element | JSX.Element[]
+    children: React.ReactNode
     onSubmit: () => void
     method: FormMethod
 }

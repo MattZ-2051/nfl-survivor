@@ -1,6 +1,6 @@
 import { refreshTokenFx, getUserProfileFx } from '@api'
 import { restoreUser } from '@store'
-import type { StorageTokenData, User } from '@types'
+import type { StorageTokenData, User, Profile } from '@types'
 import { checkStorage } from '@utils'
 import { useEvent } from 'effector-react'
 import { useEffect } from 'react'
@@ -20,10 +20,13 @@ export const useRefreshToken = async (user: User | null) => {
     }, [user])
 }
 
-export const useGetUserProfile = async (user: User | null) => {
+export const useGetUserProfile = async (
+    user: User | null,
+    profile: Profile | null
+) => {
     const getMe = useEvent(getUserProfileFx)
     useEffect(() => {
-        if (user) {
+        if (user && !profile) {
             getMe()
         }
         return

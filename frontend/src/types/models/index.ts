@@ -34,3 +34,10 @@ export type Team = {
     schedule: string
     team_data: null | string
 }
+
+export type TeamSchedule = {
+    week: string
+    team: string
+    result: string
+    score: string
+}

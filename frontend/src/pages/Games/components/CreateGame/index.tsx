@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import { Button, Input, Modal, Table } from '@components'
-import ActiveGames from '../ActiveGames'
 import { useEvent } from 'effector-react'
 import { createGameFx } from '@api'
 import { toast } from 'react-toastify'

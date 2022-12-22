@@ -7,7 +7,7 @@ getTeamsFx.doneData.watch((result) => {
     updateTeams(result.teams)
 })
 
-getTeamsFx.failData.watch((error) => {
+getTeamsFx.failData.watch(() => {
     toast.error('Error getting teams', { toastId: 'get-teams-error' })
 })
 
