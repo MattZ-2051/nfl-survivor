@@ -9,8 +9,8 @@ from .game import GameSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-      model = User
-      fields = ["username"]
+        model = User
+        fields = ["username"]
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -20,7 +20,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = "__all__"
-
 
 
 class CreateUserProfileSerializer(serializers.ModelSerializer):

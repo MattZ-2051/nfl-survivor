@@ -9,9 +9,10 @@ import {
 import { ErrorPage } from '@pages'
 import { Home, Games, Login, Signup, GameDetail } from '@pages'
 import { Main } from '@layout'
-import { useStore } from 'effector-react'
-import { $user } from '@store'
 import 'react-toastify/dist/ReactToastify.css'
+import { createStoreConsumer } from 'effector-react'
+import { $user } from '@store'
+import { useRestoreUser } from '@hooks'
 
 export const routes = {
     home: '/home',
@@ -20,32 +21,37 @@ export const routes = {
     login: '/login',
     signup: '/signup',
 }
+
+const RouteStoreConsumer = createStoreConsumer($user)
 const PrivateRoute = () => {
-    const user = useStore($user)
-    return user ? <Outlet /> : <Navigate to="/login" />
+    return (
+        <RouteStoreConsumer>
+            {(user) => (user ? <Outlet /> : <Navigate to="/login" />)}
+        </RouteStoreConsumer>
+    )
 }
 
 const UnauthenticatedRoutes = () => {
-    const user = useStore($user)
-    return !user ? <Outlet /> : <Navigate to="/home" />
+    return (
+        <RouteStoreConsumer>
+            {(user) => (!user ? <Outlet /> : <Navigate to="/home" />)}
+        </RouteStoreConsumer>
+    )
 }
 
-export const BrowserRouter = () =>
-    createBrowserRouter(
+export const BrowserRouter = () => {
+    useRestoreUser()
+    return createBrowserRouter(
         createRoutesFromElements(
             <>
                 <Route errorElement={<ErrorPage />}>
-                    <Route path="/" element={<Main />}>
+                    <Route element={<Main />}>
                         {/* Public Routes  */}
                         <Route path={routes.home} element={<Home />} />
                         {/*  */}
-
                         {/* Private Routes  */}
-                        <Route path="/" element={<PrivateRoute />}>
-                            <Route
-                                path={routes.games}
-                                element={<Games />}
-                            ></Route>
+                        <Route element={<PrivateRoute />}>
+                            <Route path={routes.games} element={<Games />} />
                             <Route
                                 path={routes.gameId}
                                 element={<GameDetail />}
@@ -54,7 +60,7 @@ export const BrowserRouter = () =>
                         {/*  */}
 
                         {/* Routes that Can't be accessed if logged in  */}
-                        <Route path="/" element={<UnauthenticatedRoutes />}>
+                        <Route element={<UnauthenticatedRoutes />}>
                             <Route
                                 path={routes.login}
                                 element={<Login />}
@@ -73,3 +79,4 @@ export const BrowserRouter = () =>
             </>
         )
     )
+}
