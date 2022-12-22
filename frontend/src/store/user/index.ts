@@ -37,7 +37,7 @@ loginFx.doneData.watch((result) => {
     toast.success('Logged In', { toastId: 'logged-in' })
 })
 
-loginFx.failData.watch((error) => {
+loginFx.failData.watch(() => {
     toast.error('Login Error', {
         toastId: 'login-error',
     })

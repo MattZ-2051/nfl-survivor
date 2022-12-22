@@ -32,7 +32,6 @@ def get_users_in_game(request, game_id):
     results = []
     for profile in queryset:
         results.append(GameProfileSerializer(profile).data)
-    print("users", results)
     return Response({"users": ""})
 
 
