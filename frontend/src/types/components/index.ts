@@ -8,3 +8,7 @@ export type TabProps = {
 }
 
 export type Tabs = TabProps[]
+
+export type ListGroupProps = {
+    items: string[]
+}

@@ -5,25 +5,22 @@ import Pagination from '../Pagination'
 
 interface IProps {
     headers: string[]
-    body: string[][]
+    body: (string | React.ReactNode)[][]
     games?: Game[]
+    active?: boolean
 }
 
-const Table: FC<IProps> = ({ headers, body, games }) => {
+const Table: FC<IProps> = ({ headers, body, games, active }) => {
     const navigate = useNavigate()
-    const [showRows, setShowRows] = useState<string[][]>()
+    const [showRows, setShowRows] = useState<(string | React.ReactNode)[][]>()
     const [paginationIndex, setPaginationIndex] = useState<number>(0)
 
-    console.log('body out', body)
     useEffect(() => {
         if (body.length > 4) {
-            console.log('three')
-            console.log('body in', body)
             setShowRows(
                 body.slice(paginationIndex * 4, paginationIndex * 4 + 4)
             )
         } else {
-            console.log('here')
             setShowRows(body)
         }
     }, [paginationIndex, body])
@@ -40,55 +37,48 @@ const Table: FC<IProps> = ({ headers, body, games }) => {
                                         {headers &&
                                             headers.map((header, index) => {
                                                 return (
-                                                    <>
-                                                        <th
-                                                            scope="col"
-                                                            key={index}
-                                                            className="px-6 py-4 text-2xl font-medium text-left text-gray-900"
-                                                        >
-                                                            {header}
-                                                        </th>
-                                                    </>
+                                                    <th
+                                                        scope="col"
+                                                        key={index}
+                                                        className="px-6 py-4 text-2xl font-medium text-left text-gray-900"
+                                                    >
+                                                        {header}
+                                                    </th>
                                                 )
                                             })}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {showRows &&
-                                        showRows.map((text, index) => {
+                                        showRows.map((item, index) => {
                                             return (
-                                                <>
-                                                    <tr
-                                                        className="transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100 hover:cursor-pointer"
-                                                        onClick={() =>
-                                                            games
-                                                                ? navigate(
-                                                                      `${games[index].id}`
-                                                                  )
-                                                                : null
+                                                <tr
+                                                    className={`transition duration-300 ease-in-out bg-white border-b ${
+                                                        active &&
+                                                        'hover:bg-gray-100 hover:cursor-pointer'
+                                                    }`}
+                                                    onClick={() =>
+                                                        games
+                                                            ? navigate(
+                                                                  `${games[index].id}`
+                                                              )
+                                                            : null
+                                                    }
+                                                    key={index}
+                                                >
+                                                    {item.map(
+                                                        (content, index) => {
+                                                            return (
+                                                                <td
+                                                                    className="px-6 py-4 text-base font-medium text-gray-900 whitespace-nowrap"
+                                                                    key={index}
+                                                                >
+                                                                    {content}
+                                                                </td>
+                                                            )
                                                         }
-                                                        key={index}
-                                                    >
-                                                        {text.map(
-                                                            (text, index) => {
-                                                                return (
-                                                                    <>
-                                                                        <td
-                                                                            className="px-6 py-4 text-base font-medium text-gray-900 whitespace-nowrap"
-                                                                            key={
-                                                                                index
-                                                                            }
-                                                                        >
-                                                                            {
-                                                                                text
-                                                                            }
-                                                                        </td>
-                                                                    </>
-                                                                )
-                                                            }
-                                                        )}
-                                                    </tr>
-                                                </>
+                                                    )}
+                                                </tr>
                                             )
                                         })}
                                 </tbody>

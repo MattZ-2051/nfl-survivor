@@ -5,15 +5,8 @@ import { Header } from '@layout'
 import type { Game, GameProfile, Tabs as TabsType } from '@types'
 import { Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
+import UsersTable from './components/UsersTable'
 
-const tabs: TabsType = [
-    {
-        title: 'NFL Schedule',
-        content: <TeamsTable />,
-    },
-    { title: 'Users', content: <h1>hello world</h1> },
-    { title: 'Me', content: <h1>me</h1> },
-]
 const GameDetail: FC = () => {
     const getGame = useEvent(getSingleGameFx)
     const getUsers = useEvent(getUsersInGameFx)
@@ -33,9 +26,25 @@ const GameDetail: FC = () => {
                 getUsers({ gameId }),
             ]).finally(() => setLoading(false))
             setGameInfo(game)
-            setGameUsers(users)
+            users.length === 0 ? setGameUsers(null) : setGameUsers(users)
         })()
     }, [])
+
+    const tabs: TabsType = [
+        {
+            title: 'NFL Schedule',
+            content: <TeamsTable />,
+        },
+        {
+            title: 'Users',
+            content: !gameUsers ? (
+                <h1>No Active Users</h1>
+            ) : (
+                <UsersTable gameUsers={gameUsers} />
+            ),
+        },
+        { title: 'Me', content: <h1>me</h1> },
+    ]
     return (
         <>
             <Header />

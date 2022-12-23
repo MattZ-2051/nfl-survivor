@@ -9,33 +9,19 @@ const Tabs: FC<IProps> = ({ tabs }) => {
     return (
         <>
             <ul
-                className="
-            bg-white
-nav
-nav-tabs
-nav-justified
-flex flex-col
-md:flex-row
-flex-wrap
-list-none
-border-b-0
-pl-0
-mb-4
-"
+                className="flex flex-col flex-wrap pl-0 mb-4 list-none bg-white border-b-0 nav nav-tabs nav-justified md:flex-row"
                 id="tabs"
                 role="tablist"
             >
                 {tabs.map((tab, index) => {
                     return (
-                        <>
-                            <li
-                                className="nav-item flex-grow text-center"
-                                role="presentation"
-                                key={index}
-                            >
-                                <a
-                                    href={`#tabs-${tab.title}`}
-                                    className={`
+                        <li
+                            className="flex-grow text-center nav-item"
+                            role="presentation"
+                            key={index}
+                        >
+                            <span
+                                className={`
   nav-link
   w-full
   block
@@ -49,33 +35,33 @@ mb-4
   my-2
   hover:border-transparent hover:bg-gray-100
   focus:border-transparent
+  hover:cursor-pointer
   ${activeTab === index ? 'active' : ''}`}
-                                    id={`tabs-${tab.title}`}
-                                    onClick={() => setActiveTab(index)}
-                                    role="tab"
-                                >
-                                    {tab.title}
-                                </a>
-                            </li>
-                        </>
+                                onClick={() => setActiveTab(index)}
+                                role="tab"
+                            >
+                                {tab.title}
+                            </span>
+                        </li>
                     )
                 })}
             </ul>
 
-            <div className="tab-content" id="tabs-tabContentJustify">
+            <div className="tab-content">
                 {tabs.map((tab, index) => {
                     return (
-                        <>
+                        <div key={index}>
                             <div
                                 className={`tab-pane fade ${
-                                    activeTab === index ? 'show active' : ''
+                                    activeTab === index
+                                        ? 'show active'
+                                        : 'hidden'
                                 }`}
                                 role="tabpanel"
-                                key={index}
                             >
                                 {tab.content}
                             </div>
-                        </>
+                        </div>
                     )
                 })}
             </div>
