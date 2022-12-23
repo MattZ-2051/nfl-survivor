@@ -68,16 +68,14 @@ const Dropdown: FC<IProps> = ({ selectedItem, items, setSelectedItem }) => {
                             aria-labelledby="dropdownMenuButton2"
                         >
                             {items.map((text, index) => (
-                                <>
-                                    <li key={index}>
-                                        <span
-                                            className="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
-                                            onClick={() => handleClick(text)}
-                                        >
-                                            {text}
-                                        </span>
-                                    </li>
-                                </>
+                                <li key={index}>
+                                    <span
+                                        className="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100 hover:cursor-pointer"
+                                        onClick={() => handleClick(text)}
+                                    >
+                                        {text}
+                                    </span>
+                                </li>
                             ))}
                         </ul>
                     </div>

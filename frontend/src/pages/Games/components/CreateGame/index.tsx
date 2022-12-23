@@ -28,11 +28,11 @@ const CreateGame: FC<IProps> = ({ games }) => {
     }
 
     return (
-        <div className="w-full h-full flex justify-center items-center flex-col">
+        <div className="flex flex-col items-center justify-center w-full h-full">
             <Button
                 type="outlined"
                 label="Create Game"
-                className="bg-white text-xl mt-8 hover:bg-white hover:bg-opacity-90"
+                className="mt-8 text-xl bg-white hover:bg-white hover:bg-opacity-90"
                 onClick={() => setIsModalOpen(true)}
             />
             <Modal
@@ -69,10 +69,11 @@ const CreateGame: FC<IProps> = ({ games }) => {
                     </div>
                 </div>
             </Modal>
-            <h1 className="text-white py-8 text-4xl">Or</h1>
-            <h1 className="text-white pb-8 text-4xl">Find a Game to join</h1>
+            <h1 className="py-8 text-4xl text-white">Or</h1>
+            <h1 className="pb-8 text-4xl text-white">Find a Game to join</h1>
             {games && (
                 <Table
+                    active
                     headers={['Game Name', 'Joinable']}
                     body={[
                         ...games.map((game) => [

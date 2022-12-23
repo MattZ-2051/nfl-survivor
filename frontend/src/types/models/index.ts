@@ -17,9 +17,9 @@ export type Game = {
 
 export type GameProfile = {
     game: Game
-    user: string
-    currentPick: Team | null
-    prevPicks: Team[] | null
+    user: { user: User }
+    current_pick: Team | null
+    prev_picks: Team[] | null
     isLoser: boolean
     is_winner: boolean
 }
