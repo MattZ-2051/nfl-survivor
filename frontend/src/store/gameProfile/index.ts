@@ -10,9 +10,9 @@ getGameProfileFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
 })
 
-const updateGameProfile = createEvent<GameProfile | null>()
+const updateGameProfile = createEvent<GameProfile[] | null>()
 
-export const $gameProfile = createStore<GameProfile | null>(null).on(
+export const $gameProfile = createStore<GameProfile[] | null>(null).on(
     updateGameProfile,
     (prevState, payload) => payload
 )

@@ -4,6 +4,7 @@ import { useEvent } from 'effector-react'
 import { createGameFx } from '@api'
 import { toast } from 'react-toastify'
 import { Game } from '@types'
+import GamesTable from '../GamesTable'
 
 interface IProps {
     games: Game[] | null
@@ -15,10 +16,11 @@ const CreateGame: FC<IProps> = ({ games }) => {
     const createGame = useEvent(createGameFx)
 
     const handleCreateGame = () => {
-        if (code && name) {
+        if (code && name && name.length > 0) {
             const codeTest = /[0-9]{4}/.test(code) && !!Number(code)
             if (codeTest) {
                 createGame({ code: code, name: name })
+                setIsModalOpen(false)
             } else {
                 toast.error('Code needs to be 4 digit number')
             }
@@ -69,20 +71,14 @@ const CreateGame: FC<IProps> = ({ games }) => {
                     </div>
                 </div>
             </Modal>
-            <h1 className="py-8 text-4xl text-white">Or</h1>
-            <h1 className="pb-8 text-4xl text-white">Find a Game to join</h1>
             {games && (
-                <Table
-                    active
-                    headers={['Game Name', 'Joinable']}
-                    body={[
-                        ...games.map((game) => [
-                            game.name,
-                            game.active ? 'No' : 'Yes',
-                        ]),
-                    ]}
-                    games={games}
-                />
+                <>
+                    <h1 className="py-8 text-4xl text-white">Or</h1>
+                    <h1 className="pb-8 text-4xl text-white">
+                        Find a Game to join
+                    </h1>
+                    <GamesTable games={games} />
+                </>
             )}
         </div>
     )

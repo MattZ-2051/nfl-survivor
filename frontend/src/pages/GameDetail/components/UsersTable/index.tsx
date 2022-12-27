@@ -24,7 +24,6 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
 
     return (
         <div>
-            <h1>Users</h1>
             <Table
                 headers={['Username', 'Current Pick', 'Previous Picks']}
                 body={[

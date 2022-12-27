@@ -18,7 +18,10 @@ def get_games(request):
     except Exception as _:
         return Response({"games": None})
     serializer = GameSerializer(queryset, many=True)
-    return Response({"games": serializer.data})
+    if len(serializer.data) == 0:
+        return Response({"games": None})
+    else:
+        return Response({"games": serializer.data})
 
 
 @api_view(["GET"])
@@ -32,8 +35,10 @@ def get_users_in_game(request, game_id):
     results = []
     for profile in queryset:
         results.append(GameProfileSerializer(profile).data)
-    print("results", results)
-    return Response({"users": results})
+    if len(results) == 0:
+        return Response({"users": None})
+    else:
+        return Response({"users": results})
 
 
 @api_view(["GET"])

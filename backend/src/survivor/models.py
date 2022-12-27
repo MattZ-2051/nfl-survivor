@@ -1,8 +1,17 @@
 import json
+
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MinLengthValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+# ENUMS
+class GameStatus(models.TextChoices):
+    UPCOMING = "UP", _("upcoming")
+    ACTIVE = "AC", _("active")
+    FINISHED = "FI", _("finished")
+
 
 # Create your models here.
 
@@ -14,11 +23,23 @@ class Team(models.Model):
 
 
 class Game(models.Model):
+    UPCOMING = "UP"
+    ACTIVE = "AC"
+    FINISHED = "FI"
+    STATUS_CHOICES = [
+        (UPCOMING, "upcoming"),
+        (ACTIVE, "active"),
+        (FINISHED, "finished"),
+    ]
+
     code = models.CharField(
         null=False,
         max_length=4,
         unique=True,
         validators=[MinLengthValidator(4, "this field requires 4 characters exactly")],
+    )
+    status = models.CharField(
+        max_length=10, choices=GameStatus.choices, default=GameStatus.UPCOMING
     )
     name = models.CharField(max_length=20, null=False)
     active = models.BooleanField(default=False, null=False, blank=True)
@@ -33,7 +54,7 @@ class UserProfile(models.Model):
 
 
 class GameProfile(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.OneToOneField(Game, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     current_pick = models.OneToOneField(
         Team,
@@ -61,6 +82,3 @@ class ScrapyItem(models.Model):
     def to_dict(self):
         data = {"data": json.loads(self.data), "date": self.date}
         return data
-
-    def __str__(self):
-        return self.unique_id
