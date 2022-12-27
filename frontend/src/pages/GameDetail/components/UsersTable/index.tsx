@@ -66,18 +66,4 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
     )
 }
 
-// <span key={index}>
-// <Dropdown
-//     selectedItem={selectedPrevPick}
-//     setSelectedItem={setSelectedPrevPick}
-//     items={
-//         item.prev_picks
-//             ? item.prev_picks.map(
-//                   (team) => team.scrapy_id
-//               )
-//             : ['None']
-//     }
-// />
-// </span>
-
 export default UsersTable
