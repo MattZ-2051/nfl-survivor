@@ -7,7 +7,7 @@ interface IProps {
 const ActiveGames: FC<IProps> = ({ game }) => {
     return (
         <>
-            <h1>Active Games</h1>
+            <h1>Your Active Games</h1>
             <p>{game.name}</p>
         </>
     )

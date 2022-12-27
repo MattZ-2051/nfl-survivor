@@ -9,5 +9,6 @@ export const getGameProfileFx = createEffect<
     AxiosError
 >(async () => {
     const response = await get('/api/games/profile/')
+    console.log('res', response.data)
     return response.data
 })

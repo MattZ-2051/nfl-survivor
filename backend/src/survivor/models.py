@@ -34,7 +34,7 @@ class UserProfile(models.Model):
 
 class GameProfile(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     current_pick = models.OneToOneField(
         Team,
         on_delete=models.CASCADE,
@@ -44,7 +44,7 @@ class GameProfile(models.Model):
         blank=True,
     )
     prev_picks = models.ManyToManyField(
-        Team, related_name="prev_picks", null=True, default=None, blank=True
+        Team, related_name="prev_picks", default=None, blank=True
     )
     is_loser = models.BooleanField(default=False, null=False)
     is_winner = models.BooleanField(default=False, null=False)

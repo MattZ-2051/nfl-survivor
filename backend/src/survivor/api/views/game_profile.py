@@ -11,8 +11,12 @@ from ..serializers.game_profile import GameProfileSerializer
 @permission_classes([IsAuthenticated])
 def get_user_game_profiles(request):
     try:
-        profile = GameProfile.objects.filter(user_id=request.user.id).get()
+        profiles = GameProfile.objects.filter(user_id=request.user.id)
     except Exception as _:
-        return Response({"profile": None})
-    serializer = GameProfileSerializer(profile, many=False)
+        return Response(
+            {"error": "Error getting games"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
+    serializer = GameProfileSerializer(profiles, many=True)
     return Response({"profile": serializer.data})
