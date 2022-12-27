@@ -1,3 +1,5 @@
+type GameStatus = 'upcoming' | 'active' | 'finished'
+
 export type AuthTokens = {
     refresh: string
     access: string
@@ -13,6 +15,7 @@ export type Game = {
     name: string
     current_week: number
     active: boolean
+    status: GameStatus
 }
 
 export type GameProfile = {

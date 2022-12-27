@@ -14,7 +14,6 @@ const Table: FC<IProps> = ({ headers, body, games, active }) => {
     const navigate = useNavigate()
     const [showRows, setShowRows] = useState<(string | React.ReactNode)[][]>()
     const [paginationIndex, setPaginationIndex] = useState<number>(0)
-
     useEffect(() => {
         if (body.length > 4) {
             setShowRows(
@@ -28,8 +27,12 @@ const Table: FC<IProps> = ({ headers, body, games, active }) => {
     return (
         <>
             <div className="flex flex-col w-full">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div
+                    className={`p-8 overflow-x-auto bg-white rounded-lg sm:-mx-6 lg:-mx-8 ${
+                        body.length > 4 ? 'h-[450px]' : 'h-full'
+                    }`}
+                >
+                    <div className="flex flex-col justify-between h-full min-w-full py-2 sm:px-6 lg:px-8">
                         <div className="rounded-lg">
                             <table className="min-w-full">
                                 <thead className="bg-white border-b">
@@ -85,7 +88,7 @@ const Table: FC<IProps> = ({ headers, body, games, active }) => {
                             </table>
                         </div>
                         {body.length > 4 && (
-                            <div className="mt-12">
+                            <div>
                                 <Pagination
                                     index={paginationIndex}
                                     length={body.length}

@@ -1,7 +1,8 @@
-import { getGamesFx, createGameFx } from '@api'
+import { getGamesFx, createGameFx, getGameProfileFx } from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
 import { toast } from 'react-toastify'
+import { updateStoreStatus } from '../status'
 
 getGamesFx.doneData.watch((result) => {
     updateGames(result.games)
@@ -12,8 +13,14 @@ getGamesFx.failData.watch(() => {
     toast.error('Error getting games', { toastId: 'get-games-error' })
 })
 
+createGameFx.pending.watch(() => {
+    updateStoreStatus('loading')
+})
+
 createGameFx.doneData.watch(() => {
     toast.success('Game Created', { toastId: 'create-game-success' })
+    updateStoreStatus('done')
+    getGameProfileFx()
     getGamesFx()
 })
 

@@ -25,20 +25,16 @@ const Games: FC = () => {
         <>
             <Header />
             {!loading && (
-                <div className="w-full h-full flex justify-center items-center">
+                <div className="flex items-center justify-center w-full h-full">
                     {gameProfile ? (
-                        <ActiveGames game={gameProfile.game} />
+                        <ActiveGames games={games} userGames={gameProfile} />
                     ) : (
-                        games && (
-                            <div className="p-12">
-                                <h1 className="text-white text-center text-4xl">
-                                    {
-                                        "Looks like you don't have any active games!"
-                                    }
-                                </h1>
-                                <CreateGame games={games} />
-                            </div>
-                        )
+                        <div className="p-12">
+                            <h1 className="text-4xl text-center text-white">
+                                {"Looks like you don't have any active games!"}
+                            </h1>
+                            <CreateGame games={games} />
+                        </div>
                     )}
                 </div>
             )}

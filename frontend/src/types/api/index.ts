@@ -8,3 +8,5 @@ export type StorageTokenData = {
     tokenData: Record<string, string>
     authTokens: AuthTokens
 }
+
+export type StoreStatus = 'loading' | 'done' | 'error'

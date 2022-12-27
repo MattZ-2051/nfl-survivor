@@ -19,4 +19,7 @@ def get_user_game_profiles(request):
             exception=True,
         )
     serializer = GameProfileSerializer(profiles, many=True)
-    return Response({"profile": serializer.data})
+    if len(serializer.data) == 0:
+        return Response({"profile": None})
+    else:
+        return Response({"profile": serializer.data})
