@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from 'react'
-import { Button, ListGroup, Modal, Table } from '@components'
+import { Table } from '@components'
 import { GameProfile } from '@types'
+import PrevPicks from '../PrevPicks'
 
 interface IProps {
     gameUsers: GameProfile[] | null | undefined
 }
 const UsersTable: FC<IProps> = ({ gameUsers }) => {
     const [selectedPrevPick, setSelectedPrevPick] = useState<string>()
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
         if (gameUsers) {
@@ -34,26 +34,10 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
                                 item.current_pick
                                     ? item.current_pick?.scrapy_id
                                     : 'None',
-                                item.prev_picks ? (
+                                item.prev_picks &&
+                                item.prev_picks.length > 0 ? (
                                     <span key={index}>
-                                        <Button
-                                            type="outlined"
-                                            label="Previous Picks"
-                                            className="w-full text-base"
-                                            onClick={() => setIsModalOpen(true)}
-                                        />
-                                        <Modal
-                                            open={isModalOpen}
-                                            setOpen={setIsModalOpen}
-                                            title="Previous Picks"
-                                            buttonTitle="test"
-                                        >
-                                            <ListGroup
-                                                items={item.prev_picks.map(
-                                                    (team) => team.scrapy_id
-                                                )}
-                                            />
-                                        </Modal>
+                                        <PrevPicks profile={item} />
                                     </span>
                                 ) : (
                                     'None'

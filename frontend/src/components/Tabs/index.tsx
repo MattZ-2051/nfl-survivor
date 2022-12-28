@@ -1,9 +1,10 @@
-import type { Tabs as TabsType } from '@types'
 import { FC, useState } from 'react'
+import { TabsType } from '@types'
 
 interface IProps {
     tabs: TabsType
 }
+
 const Tabs: FC<IProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = useState<number>(0)
     return (

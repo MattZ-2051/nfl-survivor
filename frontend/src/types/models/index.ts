@@ -19,6 +19,7 @@ export type Game = {
 }
 
 export type GameProfile = {
+    id: number
     game: Game
     user: { user: User }
     current_pick: Team | null
