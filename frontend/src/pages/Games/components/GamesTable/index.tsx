@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Game } from '@types'
 import { Table } from '@components'
+import JoinGame from '../JoinGame'
 
 interface IProps {
     games: Game[]
@@ -9,15 +10,13 @@ const GamesTable: FC<IProps> = ({ games }) => {
     return (
         <>
             <Table
-                active
                 headers={['Game Name', 'Joinable']}
                 body={[
                     ...games.map((game) => [
                         game.name,
-                        game.active ? 'No' : 'Yes',
+                        game.active ? 'No' : <JoinGame />,
                     ]),
                 ]}
-                games={games}
             />
         </>
     )

@@ -1,15 +1,11 @@
 import { FC, useState } from 'react'
-import { Button, Input, Modal, Table } from '@components'
 import { useEvent } from 'effector-react'
-import { createGameFx } from '@api'
 import { toast } from 'react-toastify'
-import { Game } from '@types'
-import GamesTable from '../GamesTable'
 
-interface IProps {
-    games: Game[] | null
-}
-const CreateGame: FC<IProps> = ({ games }) => {
+import { Button, Input, Modal } from '@components'
+import { createGameFx } from '@api'
+
+const CreateGame: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [code, setCode] = useState<string>()
     const [name, setName] = useState<string>()
@@ -71,15 +67,6 @@ const CreateGame: FC<IProps> = ({ games }) => {
                     </div>
                 </div>
             </Modal>
-            {games && (
-                <>
-                    <h1 className="py-8 text-4xl text-white">Or</h1>
-                    <h1 className="pb-8 text-4xl text-white">
-                        Find a Game to join
-                    </h1>
-                    <GamesTable games={games} />
-                </>
-            )}
         </div>
     )
 }

@@ -11,3 +11,12 @@ export const getGameProfileFx = createEffect<
     const response = await get('/api/games/profile/')
     return response.data
 })
+
+export const getUsersInGameFx = createEffect<
+    { gameId: number },
+    { users: GameProfile[] },
+    AxiosError
+>(async ({ gameId }) => {
+    const response = await get(`/api/games/${gameId}/users/`)
+    return response.data
+})
