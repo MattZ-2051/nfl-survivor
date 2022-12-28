@@ -11,7 +11,7 @@ import { Home, Games, Login, Signup, GameDetail } from '@pages'
 import { Main } from '@layout'
 import 'react-toastify/dist/ReactToastify.css'
 import { createStoreConsumer } from 'effector-react'
-import { $user } from '@store'
+import { $gameProfile, $user } from '@store'
 import { useRestoreUser } from '@hooks'
 
 export const routes = {
@@ -22,20 +22,30 @@ export const routes = {
     signup: '/signup',
 }
 
-const RouteStoreConsumer = createStoreConsumer($user)
+const UserRouteStoreConsumer = createStoreConsumer($user)
+const GameRouteStoreConsumer = createStoreConsumer($gameProfile)
 const PrivateRoute = () => {
     return (
-        <RouteStoreConsumer>
+        <UserRouteStoreConsumer>
             {(user) => (user ? <Outlet /> : <Navigate to="/login" />)}
-        </RouteStoreConsumer>
+        </UserRouteStoreConsumer>
     )
 }
 
+const GamePrivateRoute = () => {
+    return (
+        <GameRouteStoreConsumer>
+            {(gameProfile) =>
+                gameProfile ? <Outlet /> : <Navigate to="/games" />
+            }
+        </GameRouteStoreConsumer>
+    )
+}
 const UnauthenticatedRoutes = () => {
     return (
-        <RouteStoreConsumer>
+        <UserRouteStoreConsumer>
             {(user) => (!user ? <Outlet /> : <Navigate to="/home" />)}
-        </RouteStoreConsumer>
+        </UserRouteStoreConsumer>
     )
 }
 
@@ -52,6 +62,8 @@ export const BrowserRouter = () => {
                         {/* Private Routes  */}
                         <Route element={<PrivateRoute />}>
                             <Route path={routes.games} element={<Games />} />
+                        </Route>
+                        <Route element={<GamePrivateRoute />}>
                             <Route
                                 path={routes.gameId}
                                 element={<GameDetail />}

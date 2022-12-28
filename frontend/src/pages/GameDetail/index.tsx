@@ -1,18 +1,26 @@
 import { FC, useEffect, useState } from 'react'
-import { useEvent } from 'effector-react'
-import { getSingleGameFx, getTeamsFx, getUsersInGameFx } from '@api'
+import { useEvent, useStore } from 'effector-react'
+import { getSingleGameFx, getUsersInGameFx } from '@api'
 import { Header } from '@layout'
 import type { Game, GameProfile, Tabs as TabsType } from '@types'
 import { Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
 import UsersTable from './components/UsersTable'
+import MeDetail from './components/MeDetail'
+import { $user } from '@store'
+import { useNavigate } from 'react-router-dom'
 
 const GameDetail: FC = () => {
+    const navigate = useNavigate()
     const getGame = useEvent(getSingleGameFx)
     const getUsers = useEvent(getUsersInGameFx)
     const [gameInfo, setGameInfo] = useState<Game | null>()
     const [gameUsers, setGameUsers] = useState<GameProfile[] | null>()
+    const [currentUserGameProfile, setCurrentUserGameProfile] =
+        useState<GameProfile | null>()
     const [loading, setLoading] = useState<boolean>(false)
+    const currentUser = useStore($user)
+
     useEffect(() => {
         setLoading(true)
         const gameId = Number.parseInt(
@@ -26,7 +34,34 @@ const GameDetail: FC = () => {
                 getUsers({ gameId }),
             ]).finally(() => setLoading(false))
             setGameInfo(game)
-            users.length === 0 ? setGameUsers(null) : setGameUsers(users)
+            users?.length === 0 || !users
+                ? setGameUsers(null)
+                : setGameUsers(
+                      users.filter(
+                          (user) =>
+                              user.user.user.username !== currentUser?.username
+                      ).length > 0
+                          ? users.filter(
+                                (user) =>
+                                    user.user.user.username !==
+                                    currentUser?.username
+                            )
+                          : null
+                  )
+            users?.length === 0 || !users
+                ? setCurrentUserGameProfile(null)
+                : setCurrentUserGameProfile(
+                      users.filter(
+                          (user) =>
+                              user.user.user.username === currentUser?.username
+                      ).length > 0
+                          ? users.filter(
+                                (user) =>
+                                    user.user.user.username ===
+                                    currentUser?.username
+                            )[0]
+                          : null
+                  )
         })()
     }, [])
 
@@ -37,13 +72,12 @@ const GameDetail: FC = () => {
         },
         {
             title: 'Users',
-            content: !gameUsers ? (
-                <h1>No Active Users</h1>
-            ) : (
-                <UsersTable gameUsers={gameUsers} />
-            ),
+            content: <UsersTable gameUsers={gameUsers} />,
         },
-        { title: 'Me', content: <h1>me</h1> },
+        {
+            title: 'Me',
+            content: <MeDetail userProfile={currentUserGameProfile} />,
+        },
     ]
     return (
         <>

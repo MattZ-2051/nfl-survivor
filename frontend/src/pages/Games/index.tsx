@@ -1,11 +1,13 @@
 import { FC, useEffect, useState } from 'react'
-import { Header } from '@layout'
 import { useEvent, useStore } from 'effector-react'
+
+import { Header } from '@layout'
 import { $gameProfile, $games } from '@store'
+import { getGameProfileFx, getGamesFx } from '@api'
 
 import CreateGame from './components/CreateGame'
 import ActiveGames from './components/ActiveGames'
-import { getGameProfileFx, getGamesFx } from '@api'
+import FindGames from './components/FindGames'
 
 const Games: FC = () => {
     const gameProfile = useStore($gameProfile)
@@ -33,7 +35,8 @@ const Games: FC = () => {
                             <h1 className="text-4xl text-center text-white">
                                 {"Looks like you don't have any active games!"}
                             </h1>
-                            <CreateGame games={games} />
+                            <CreateGame />
+                            {games && <FindGames games={games} />}
                         </div>
                     )}
                 </div>

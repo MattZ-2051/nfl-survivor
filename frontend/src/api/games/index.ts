@@ -19,15 +19,6 @@ export const getSingleGameFx = createEffect<
     return response.data
 })
 
-export const getUsersInGameFx = createEffect<
-    { gameId: number },
-    { users: GameProfile[] },
-    AxiosError
->(async ({ gameId }) => {
-    const response = await get(`/api/games/${gameId}/users/`)
-    return response.data
-})
-
 export const createGameFx = createEffect<
     { code: string; name: string },
     { game: Game },
