@@ -2,27 +2,23 @@ import { FC, useEffect, useState } from 'react'
 import { useEvent, useStore } from 'effector-react'
 import { getSingleGameFx, getUsersInGameFx } from '@api'
 import { Header } from '@layout'
-import type { Game, GameProfile, Tabs as TabsType } from '@types'
+import type { Game, GameProfile, TabsType } from '@types'
 import { Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
 import UsersTable from './components/UsersTable'
 import MeDetail from './components/MeDetail'
 import { $user } from '@store'
-import { useNavigate } from 'react-router-dom'
 
 const GameDetail: FC = () => {
-    const navigate = useNavigate()
     const getGame = useEvent(getSingleGameFx)
     const getUsers = useEvent(getUsersInGameFx)
     const [gameInfo, setGameInfo] = useState<Game | null>()
     const [gameUsers, setGameUsers] = useState<GameProfile[] | null>()
     const [currentUserGameProfile, setCurrentUserGameProfile] =
         useState<GameProfile | null>()
-    const [loading, setLoading] = useState<boolean>(false)
     const currentUser = useStore($user)
 
     useEffect(() => {
-        setLoading(true)
         const gameId = Number.parseInt(
             window.location.pathname.split('/')[2],
             10
@@ -32,7 +28,7 @@ const GameDetail: FC = () => {
             const [{ game }, { users }] = await Promise.all([
                 getGame({ gameId }),
                 getUsers({ gameId }),
-            ]).finally(() => setLoading(false))
+            ])
             setGameInfo(game)
             users?.length === 0 || !users
                 ? setGameUsers(null)
@@ -76,7 +72,9 @@ const GameDetail: FC = () => {
         },
         {
             title: 'Me',
-            content: <MeDetail userProfile={currentUserGameProfile} />,
+            content: currentUserGameProfile && (
+                <MeDetail userProfile={currentUserGameProfile} />
+            ),
         },
     ]
     return (

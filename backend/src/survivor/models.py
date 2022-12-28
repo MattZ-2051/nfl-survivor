@@ -54,7 +54,7 @@ class UserProfile(models.Model):
 
 
 class GameProfile(models.Model):
-    game = models.OneToOneField(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     current_pick = models.OneToOneField(
         Team,
