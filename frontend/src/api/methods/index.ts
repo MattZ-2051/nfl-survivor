@@ -31,3 +31,7 @@ export const post = async (
 ): Promise<any> => {
     return await axiosInstance.post(path, data, getHeaders())
 }
+
+export const patch = async (path: string, data: any): Promise<any> => {
+    return await axiosInstance.patch(path, data, getHeaders())
+}

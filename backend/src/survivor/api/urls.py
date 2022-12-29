@@ -16,6 +16,11 @@ urlpatterns = [
     path("games/<int:game_id>/", game_view.get_single_game, name="game"),
     path("games/create/", game_view.create_games, name="create_game"),
     path(
+        "games/profile/update/",
+        game_profile_view.update_user_pick,
+        name="update_game_profile",
+    ),
+    path(
         "games/profile/", game_profile_view.get_user_game_profiles, name="game_profiles"
     ),
     path("games/", game_view.get_games, name="games"),
