@@ -17,9 +17,11 @@ const ListGroup: FC<IProps> = ({
     const handleSelect = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         const text = e.currentTarget.innerHTML
         if (setCurrentPick) {
-            selectedPick ? setCurrentPick(null) : setCurrentPick(text)
+            selectedPick === text ? setCurrentPick(null) : setCurrentPick(text)
         }
     }
+
+    console.log('pick', selectedPick)
 
     return (
         <>
@@ -33,7 +35,7 @@ const ListGroup: FC<IProps> = ({
                                     'hover:bg-gray-100 hover:cursor-pointer'
                                 }`}
                                 key={index}
-                                onClick={handleSelect}
+                                onClick={active ? handleSelect : () => null}
                             >
                                 {item}
                                 {item === selectedPick && (

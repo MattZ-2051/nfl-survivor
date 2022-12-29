@@ -7,11 +7,12 @@ import { Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
 import UsersTable from './components/UsersTable'
 import MeDetail from './components/MeDetail'
-import { $user } from '@store'
+import { $gameProfile, $user } from '@store'
 
 const GameDetail: FC = () => {
     const getGame = useEvent(getSingleGameFx)
     const getUsers = useEvent(getUsersInGameFx)
+    const gameProfile = useStore($gameProfile)
     const [gameInfo, setGameInfo] = useState<Game | null>()
     const [gameUsers, setGameUsers] = useState<GameProfile[] | null>()
     const [currentUserGameProfile, setCurrentUserGameProfile] =
@@ -23,7 +24,6 @@ const GameDetail: FC = () => {
             window.location.pathname.split('/')[2],
             10
         )
-
         ;(async () => {
             const [{ game }, { users }] = await Promise.all([
                 getGame({ gameId }),
@@ -44,22 +44,23 @@ const GameDetail: FC = () => {
                             )
                           : null
                   )
-            users?.length === 0 || !users
-                ? setCurrentUserGameProfile(null)
-                : setCurrentUserGameProfile(
-                      users.filter(
-                          (user) =>
-                              user.user.user.username === currentUser?.username
-                      ).length > 0
-                          ? users.filter(
-                                (user) =>
-                                    user.user.user.username ===
-                                    currentUser?.username
-                            )[0]
-                          : null
-                  )
         })()
     }, [])
+
+    useEffect(() => {
+        const gameId = Number.parseInt(
+            window.location.pathname.split('/')[2],
+            10
+        )
+        gameProfile?.length === 0 || !gameProfile
+            ? setCurrentUserGameProfile(null)
+            : setCurrentUserGameProfile(
+                  gameProfile.filter((user) => user.game.id === gameId).length >
+                      0
+                      ? gameProfile.filter((user) => user.game.id === gameId)[0]
+                      : null
+              )
+    }, [gameProfile])
 
     const tabs: TabsType = [
         {

@@ -1,14 +1,17 @@
-import { FC } from 'react'
-import type { GameProfile } from '@types'
+import { FC, useEffect, useState } from 'react'
+import { GameProfile, Team } from '@types'
 import PrevPicks from '../PrevPicks'
 import SelectPick from '../SelectPick'
 import { Table } from '@components'
+import { useStore } from 'effector-react'
+import { $teams } from '@store'
 
 interface IProps {
     userProfile: GameProfile
 }
 
 const MeDetail: FC<IProps> = ({ userProfile }) => {
+    const teams = useStore($teams)
     return (
         <>
             <div className="flex flex-col items-center w-full">
@@ -21,14 +24,29 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
                                 className="flex items-center"
                             >
                                 {userProfile.current_pick ? (
-                                    <p>userProfile.current_pick</p>
+                                    <p>{userProfile.current_pick.scrapy_id}</p>
                                 ) : (
                                     <p>Select Pick</p>
                                 )}
                                 <div className="ml-4">
-                                    <SelectPick
-                                        prevPicks={userProfile.prev_picks}
-                                    />
+                                    {teams && userProfile && (
+                                        <SelectPick
+                                            prevPicks={userProfile.prev_picks}
+                                            availablePicks={teams?.filter(
+                                                (team) => {
+                                                    if (
+                                                        !userProfile?.prev_picks?.some(
+                                                            (prevPick) =>
+                                                                prevPick.scrapy_id ===
+                                                                team.scrapy_id
+                                                        )
+                                                    ) {
+                                                        return team
+                                                    }
+                                                }
+                                            )}
+                                        />
+                                    )}
                                 </div>
                             </div>,
                             userProfile.prev_picks &&
