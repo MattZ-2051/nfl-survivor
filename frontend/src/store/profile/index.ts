@@ -1,7 +1,6 @@
 import { createEvent, createStore } from 'effector'
 import { getUserProfileFx } from '@api'
 import { Profile } from '@types'
-import { clearStorage } from '../user'
 
 getUserProfileFx.doneData.watch((result) => {
     updateUserProfile(result)
@@ -10,7 +9,6 @@ getUserProfileFx.doneData.watch((result) => {
 getUserProfileFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
     clearUserProfile()
-    clearStorage()
 })
 
 const updateUserProfile = createEvent<Profile>()

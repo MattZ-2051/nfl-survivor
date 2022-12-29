@@ -1,8 +1,9 @@
-import { getGamesFx, createGameFx, getGameProfileFx } from '@api'
+import { getGamesFx, createGameFx, getGameProfileFx, joinGameFx } from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
 import { toast } from 'react-toastify'
 import { updateStoreStatus } from '../status'
+import { clearStorage } from '../user'
 
 getGamesFx.doneData.watch((result) => {
     updateGames(result.games)
@@ -10,7 +11,7 @@ getGamesFx.doneData.watch((result) => {
 
 getGamesFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
-    toast.error('Error getting games', { toastId: 'get-games-error' })
+    clearStorage()
 })
 
 createGameFx.pending.watch(() => {
@@ -33,6 +34,21 @@ createGameFx.failData.watch((error) => {
               })
             : toast.error('Error creating game')
     }
+})
+
+joinGameFx.doneData.watch(() => {
+    toast.success('Game Joined')
+    getGameProfileFx()
+    getGamesFx()
+})
+
+joinGameFx.failData.watch((error) => {
+    if (error.response?.data && error.response.status === 400) {
+        const errorMessage = error.response.data as { error: string }
+        toast.error(errorMessage.error, { toastId: 'join-game-error' })
+        return
+    }
+    toast.error('Error joining game', { toastId: 'join-game-error' })
 })
 
 const updateGames = createEvent<Game[]>()

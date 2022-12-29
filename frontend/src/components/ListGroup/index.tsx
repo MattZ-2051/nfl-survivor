@@ -21,8 +21,6 @@ const ListGroup: FC<IProps> = ({
         }
     }
 
-    console.log('pick', selectedPick)
-
     return (
         <>
             <div className="flex w-full my-8 overflow-hidden hover:overflow-auto max-h-80">

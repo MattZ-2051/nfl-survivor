@@ -2,6 +2,7 @@ import { createEvent, createStore } from 'effector'
 import { getGameProfileFx, updateGamePickFx } from '@api'
 import { GameProfile } from '@types'
 import { toast } from 'react-toastify'
+import { clearStorage } from '../user'
 
 getGameProfileFx.doneData.watch((result) => {
     updateGameProfile(result.profile)
@@ -13,10 +14,9 @@ getGameProfileFx.failData.watch(() => {
 
 const updateGameProfile = createEvent<GameProfile[] | null>()
 
-export const $gameProfile = createStore<GameProfile[] | null>(null).on(
-    updateGameProfile,
-    (prevState, payload) => payload
-)
+export const $gameProfile = createStore<GameProfile[] | null>(null)
+    .on(updateGameProfile, (prevState, payload) => payload)
+    .reset(clearStorage)
 
 updateGamePickFx.doneData.watch(() => {
     getGameProfileFx()
