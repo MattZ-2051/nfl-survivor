@@ -37,6 +37,7 @@ export type Team = {
     scrapy_id: string
     schedule: string
     team_data: null | string
+    team_name: string
 }
 
 export type TeamSchedule = {

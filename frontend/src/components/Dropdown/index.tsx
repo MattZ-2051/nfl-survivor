@@ -62,7 +62,7 @@ const Dropdown: FC<IProps> = ({ selectedItem, items, setSelectedItem }) => {
                             </svg>
                         </div>
                         <ul
-                            className={`max-h-[200px] overflow-x-scroll absolute z-50 float-left w-full py-2 m-0 mt-1 text-base text-left list-none bg-white border-none rounded-lg shadow-lg dropdown-menu min-w-max bg-clip-padding ${
+                            className={`max-h-[200px] overflow-auto absolute z-50 float-left w-full py-2 m-0 mt-1 text-base text-left list-none bg-white border-none rounded-lg shadow-lg dropdown-menu min-w-max bg-clip-padding ${
                                 !isOpen && 'hidden'
                             }`}
                             aria-labelledby="dropdownMenuButton2"
