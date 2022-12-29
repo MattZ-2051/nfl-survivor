@@ -39,7 +39,7 @@ const SelectPick: FC<IProps> = ({ availablePicks }) => {
             >
                 {availablePicks ? (
                     <ListGroup
-                        items={availablePicks.map((pick) => pick.scrapy_id)}
+                        items={availablePicks.map((pick) => pick.team_name)}
                         active
                         setCurrentPick={setSelectedPick}
                         selectedPick={selectedPick}

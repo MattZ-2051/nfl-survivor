@@ -24,7 +24,7 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
                                 className="flex items-center"
                             >
                                 {userProfile.current_pick ? (
-                                    <p>{userProfile.current_pick.scrapy_id}</p>
+                                    <p>{userProfile.current_pick.team_name}</p>
                                 ) : (
                                     <p>Select Pick</p>
                                 )}

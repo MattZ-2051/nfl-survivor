@@ -20,6 +20,7 @@ class Team(models.Model):
     scrapy_id = models.CharField(null=False, max_length=5)
     schedule = models.JSONField(null=False)
     team_data = models.JSONField(null=True, default=None, blank=True)
+    team_name = models.CharField(null=False, max_length=50)
 
 
 class Game(models.Model):

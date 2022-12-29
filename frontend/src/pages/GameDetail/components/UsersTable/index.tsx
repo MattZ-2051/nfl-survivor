@@ -32,7 +32,7 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
                             return [
                                 item.user.user.username,
                                 item.current_pick
-                                    ? item.current_pick?.scrapy_id
+                                    ? item.current_pick.team_name
                                     : 'None',
                                 item.prev_picks &&
                                 item.prev_picks.length > 0 ? (

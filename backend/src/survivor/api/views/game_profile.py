@@ -40,7 +40,7 @@ def update_user_pick(request):
             exception=True,
         )
     # for pick in profile.prev_picks:
-    if len(profile.prev_picks.filter(scrapy_id=new_pick).all()) is not 0:
+    if len(profile.prev_picks.filter(scrapy_id=new_pick).all()) != 0:
         return Response(
             {"error": "Team has been picked before"},
             status=status.HTTP_400_BAD_REQUEST,

@@ -27,10 +27,8 @@ const TeamsTable: FC = () => {
 
     return teams ? (
         <>
-            <div className="flex items-center justify-between w-full">
-                <p className="text-3xl font-normal">
-                    Team {showTeam?.scrapy_id}
-                </p>
+            <div className="flex items-center justify-between w-full px-8 mt-12">
+                <p className="text-3xl font-normal">{showTeam?.team_name}</p>
                 <Dropdown
                     selectedItem={selectedTeamId}
                     items={teams.map((team) => team.scrapy_id)}
