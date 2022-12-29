@@ -23,6 +23,7 @@ urlpatterns = [
     path(
         "games/profile/", game_profile_view.get_user_game_profiles, name="game_profiles"
     ),
+    path("games/join/", game_view.join_game, name="join_game"),
     path("games/", game_view.get_games, name="games"),
     path("teams/", team_view.get_teams, name="teams"),
     path("users/me/", user_view.get_user_profile, name="get_me"),

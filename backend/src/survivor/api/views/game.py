@@ -72,3 +72,28 @@ def create_games(request):
         return Response(
             new_game.errors, status=status.HTTP_400_BAD_REQUEST, exception=True
         )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def join_game(request):
+    code = request.data.get("code")
+
+    try:
+        game = Game.objects.filter(code=code).get()
+        user = UserProfile.objects.get(user=request.user)
+    except Exception as _:
+        return Response(
+            {"error": "Invalid Game Code"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
+    try:
+        GameProfile.objects.create(user=user, game=game)
+    except Exception as _:
+        Response(
+            {"error": "error creating game"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
+    return Response("game joined")

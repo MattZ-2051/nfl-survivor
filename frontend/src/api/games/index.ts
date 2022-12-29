@@ -30,3 +30,12 @@ export const createGameFx = createEffect<
     })
     return response.data
 })
+
+export const joinGameFx = createEffect<{ code: string }, void, AxiosError>(
+    async ({ code }) => {
+        const response = await post('/api/games/join/', {
+            code,
+        })
+        return response.data
+    }
+)
