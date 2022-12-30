@@ -96,4 +96,21 @@ def join_game(request):
             status=status.HTTP_400_BAD_REQUEST,
             exception=True,
         )
-    return Response("game joined")
+    return Response({"game_id": game.id})
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def leave_game(request, game_id):
+    game = Game.objects.get(id=game_id)
+    user_profile = UserProfile.objects.get(user=request.user)
+    game_profile = GameProfile.objects.get(game=game, user=user_profile)
+    try:
+        game_profile.delete()
+    except Exception as _:
+        Response(
+            {"error": "error leaving game"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
+    return Response("game profile deleted")

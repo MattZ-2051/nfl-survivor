@@ -35,3 +35,7 @@ export const post = async (
 export const patch = async (path: string, data: any): Promise<any> => {
     return await axiosInstance.patch(path, data, getHeaders())
 }
+
+export const del = async (path: string): Promise<any> => {
+    return await axiosInstance.delete(path, getHeaders())
+}

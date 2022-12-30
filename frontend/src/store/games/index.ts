@@ -1,4 +1,10 @@
-import { getGamesFx, createGameFx, getGameProfileFx, joinGameFx } from '@api'
+import {
+    getGamesFx,
+    createGameFx,
+    getGameProfileFx,
+    joinGameFx,
+    leaveGameFx,
+} from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
 import { toast } from 'react-toastify'
@@ -12,6 +18,16 @@ getGamesFx.doneData.watch((result) => {
 getGamesFx.failData.watch(() => {
     // logs user out and clears data if there is an error with the token
     clearStorage()
+})
+
+leaveGameFx.doneData.watch(() => {
+    // getGameProfileFx()
+    // getGamesFx()
+    toast.success('Game left successfully')
+})
+
+leaveGameFx.failData.watch(() => {
+    toast.error('Error leaving game')
 })
 
 createGameFx.pending.watch(() => {

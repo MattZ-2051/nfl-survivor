@@ -8,8 +8,7 @@ interface IProps {
 const FindGames: FC<IProps> = ({ games }) => {
     return (
         <>
-            <div>
-                <h1 className="py-8 text-4xl text-center text-white">Or</h1>
+            <div className="mt-12">
                 <h1 className="pb-8 text-4xl text-center text-white">
                     Find a Game to join
                 </h1>

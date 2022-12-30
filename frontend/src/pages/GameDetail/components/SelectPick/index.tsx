@@ -19,11 +19,15 @@ const SelectPick: FC<IProps> = ({ availablePicks }) => {
             toast.error('Select a Team')
             return
         }
-        updateGamePick({
-            newPick: availablePicks?.find(
-                (team) => team.team_name === selectedPick
-            )?.scrapy_id,
-        })
+        const newPick = availablePicks?.find(
+            (team) => team.team_name === selectedPick
+        )?.scrapy_id
+        if (newPick) {
+            updateGamePick({
+                newPick,
+            })
+        }
+
         setIsModalOpen(false)
     }
 
