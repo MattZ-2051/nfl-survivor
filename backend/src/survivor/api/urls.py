@@ -14,6 +14,7 @@ from .views import (
 urlpatterns = [
     path("games/<int:game_id>/users/", game_view.get_users_in_game),
     path("games/<int:game_id>/", game_view.get_single_game, name="game"),
+    path("games/leave/<int:game_id>/", game_view.leave_game, name="leave_game"),
     path("games/create/", game_view.create_games, name="create_game"),
     path(
         "games/profile/update/",

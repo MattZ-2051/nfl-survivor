@@ -3,13 +3,14 @@ import { Modal, Button, Input } from '@components'
 import { useEvent } from 'effector-react'
 import { joinGameFx } from '@api'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const JoinGame: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [code, setCode] = useState<string>('')
     const joinGame = useEvent(joinGameFx)
 
-    const handleJoinGame = () => {
+    const handleJoinGame = async () => {
         const codeTest = /[0-9]{4}/.test(code) && !!Number(code)
         if (codeTest) {
             joinGame({ code })

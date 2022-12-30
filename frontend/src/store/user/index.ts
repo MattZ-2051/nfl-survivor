@@ -1,5 +1,11 @@
 import { createEvent, createStore } from 'effector'
-import { loginFx, sessionDeleteFx, refreshTokenFx, signupFx } from '@api'
+import {
+    loginFx,
+    sessionDeleteFx,
+    refreshTokenFx,
+    signupFx,
+    getGameProfileFx,
+} from '@api'
 import type { AuthTokens, User } from '@types'
 import { checkStorage, decodeJwtToken } from '@utils'
 import { toast } from 'react-toastify'
@@ -64,6 +70,7 @@ clearStorage.watch(() => {
 
 restoreUser.watch(() => {
     const userData = checkStorage()
+    getGameProfileFx()
     userData
         ? updateUser({
               username: userData.tokenData.username,

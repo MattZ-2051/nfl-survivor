@@ -1,23 +1,26 @@
 import { FC, useEffect, useState } from 'react'
 import { useEvent, useStore } from 'effector-react'
-import { getSingleGameFx, getUsersInGameFx } from '@api'
+import { getSingleGameFx, getUsersInGameFx, leaveGameFx } from '@api'
 import { Header } from '@layout'
 import type { Game, GameProfile, TabsType } from '@types'
-import { Tabs } from '@components'
+import { Button, Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
 import UsersTable from './components/UsersTable'
 import MeDetail from './components/MeDetail'
 import { $gameProfile, $user } from '@store'
+import { useNavigate } from 'react-router-dom'
 
 const GameDetail: FC = () => {
     const getGame = useEvent(getSingleGameFx)
     const getUsers = useEvent(getUsersInGameFx)
     const gameProfile = useStore($gameProfile)
+    const leaveGame = useEvent(leaveGameFx)
     const [gameInfo, setGameInfo] = useState<Game | null>()
     const [gameUsers, setGameUsers] = useState<GameProfile[] | null>()
     const [currentUserGameProfile, setCurrentUserGameProfile] =
         useState<GameProfile | null>()
     const currentUser = useStore($user)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const gameId = Number.parseInt(
@@ -47,6 +50,15 @@ const GameDetail: FC = () => {
         })()
     }, [])
 
+    const handleLeaveGame = () => {
+        const gameId = Number.parseInt(
+            window.location.pathname.split('/')[2],
+            10
+        )
+        leaveGame({ gameId })
+        navigate('/games')
+    }
+
     useEffect(() => {
         const gameId = Number.parseInt(
             window.location.pathname.split('/')[2],
@@ -68,7 +80,7 @@ const GameDetail: FC = () => {
             content: <TeamsTable />,
         },
         {
-            title: 'Game Players',
+            title: 'Game Info',
             content: <UsersTable gameUsers={gameUsers} />,
         },
         {
@@ -89,6 +101,12 @@ const GameDetail: FC = () => {
                                 <div className="flex">
                                     <h1>Name:</h1>
                                     <h1 className="ml-4">{gameInfo.name}</h1>
+                                    <Button
+                                        label="Leave Game"
+                                        type="primary"
+                                        onClick={handleLeaveGame}
+                                        className="ml-4"
+                                    />
                                 </div>
                                 <div className="flex">
                                     <h1>Current Week:</h1>

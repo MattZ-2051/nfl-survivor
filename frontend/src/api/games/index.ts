@@ -1,7 +1,7 @@
 import { createEffect } from 'effector'
 import { Game, GameProfile } from '@types'
-import { get, post } from '../methods'
-import { AxiosError } from 'axios'
+import { get, post, del } from '../methods'
+import { Axios, AxiosError } from 'axios'
 
 export const getGamesFx = createEffect<void, { games: Game[] }, AxiosError>(
     async () => {
@@ -31,11 +31,20 @@ export const createGameFx = createEffect<
     return response.data
 })
 
-export const joinGameFx = createEffect<{ code: string }, void, AxiosError>(
-    async ({ code }) => {
-        const response = await post('/api/games/join/', {
-            code,
-        })
+export const joinGameFx = createEffect<
+    { code: string },
+    { game_id: number },
+    AxiosError
+>(async ({ code }) => {
+    const response = await post('/api/games/join/', {
+        code,
+    })
+    return response.data
+})
+
+export const leaveGameFx = createEffect<{ gameId: number }, void, AxiosError>(
+    async ({ gameId }) => {
+        const response = await del(`/api/games/leave/${gameId}/`)
         return response.data
     }
 )
