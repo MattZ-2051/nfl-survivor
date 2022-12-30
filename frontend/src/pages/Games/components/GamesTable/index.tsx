@@ -10,7 +10,7 @@ const GamesTable: FC<IProps> = ({ games }) => {
     return (
         <>
             <Table
-                headers={['Game Name', 'Joinable']}
+                headers={['Game Name', '']}
                 body={[
                     ...games.map((game) => [
                         game.name,

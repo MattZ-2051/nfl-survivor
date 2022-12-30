@@ -14,7 +14,7 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
     const teams = useStore($teams)
     return (
         <>
-            <div className="flex flex-col items-center w-full">
+            <div className="flex flex-col items-center justify-between w-full h-[400px]">
                 <Table
                     headers={['Current Pick', 'Previous Picks']}
                     body={[
@@ -58,6 +58,11 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
                         ],
                     ]}
                 />
+                <p className="px-12 pb-12 leading-normal text-justify text-gray-500">
+                    {
+                        'The deadline for updating a current pick for the current week is an hour before the start of the TNF game. Once past the deadline picks will be locked for this week and added into the previous picks column. If you have lost in the current game updating picks will be disabled.'
+                    }
+                </p>
             </div>
         </>
     )

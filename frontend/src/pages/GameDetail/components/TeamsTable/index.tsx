@@ -36,7 +36,7 @@ const TeamsTable: FC = () => {
                 />
             </div>
             {teamSchedule && showTeam && (
-                <div className="min-h-[400px]">
+                <div className="h-full">
                     <Table
                         headers={['Week', 'Team', 'Result', 'Score']}
                         body={[

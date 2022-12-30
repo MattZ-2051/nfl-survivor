@@ -14,24 +14,26 @@ const ActiveGames: FC<IProps> = ({ games, userGames }) => {
             .length > 0
 
     return (
-        <div className="flex items-center justify-center w-full h-full p-6">
-            <div>
+        <div className="flex flex-col items-center justify-center w-full h-full p-6">
+            <div className="mt-4">
                 <h1 className="mb-12 text-center text-white">
                     Your Active Games
                 </h1>
                 <UserGamesTable games={userGames.map((game) => game.game)} />
-                {otherGames && (
-                    <div>
-                        <h1>Find Other Games to Join</h1>
-                        <GamesTable
-                            games={games.filter(
-                                (game, index) =>
-                                    userGames?.[index]?.game?.id !== game.id
-                            )}
-                        />
-                    </div>
-                )}
             </div>
+            {otherGames && (
+                <div className="mt-8">
+                    <h1 className="mb-12 text-center text-white">
+                        Find Other Games to Join
+                    </h1>
+                    <GamesTable
+                        games={games.filter(
+                            (game, index) =>
+                                userGames?.[index]?.game?.id !== game.id
+                        )}
+                    />
+                </div>
+            )}
         </div>
     )
 }

@@ -23,7 +23,7 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
     }, [])
 
     return (
-        <div>
+        <div className="min-h-[400px]">
             {gameUsers ? (
                 <Table
                     headers={['Username', 'Current Pick', 'Previous Picks']}

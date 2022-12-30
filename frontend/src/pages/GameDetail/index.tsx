@@ -68,11 +68,11 @@ const GameDetail: FC = () => {
             content: <TeamsTable />,
         },
         {
-            title: 'Users',
+            title: 'Game Players',
             content: <UsersTable gameUsers={gameUsers} />,
         },
         {
-            title: 'Me',
+            title: 'My Game Profile',
             content: currentUserGameProfile && (
                 <MeDetail userProfile={currentUserGameProfile} />
             ),
@@ -84,7 +84,7 @@ const GameDetail: FC = () => {
             <div className="flex items-center justify-center w-full h-full">
                 {gameInfo && (
                     <div className="w-2/3 py-4">
-                        <div className="flex-col w-full p-8 bg-white rounded-lg">
+                        <div className="flex-col w-full p-12 bg-white rounded-lg">
                             <div className="flex items-baseline justify-between">
                                 <div className="flex">
                                     <h1>Name:</h1>

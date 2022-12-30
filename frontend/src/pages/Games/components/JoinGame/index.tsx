@@ -23,7 +23,7 @@ const JoinGame: FC = () => {
     return (
         <>
             <Button
-                label="Yes"
+                label="Join"
                 type="primary"
                 onClick={() => setIsModalOpen(true)}
             />
