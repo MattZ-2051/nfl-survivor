@@ -105,6 +105,12 @@ def leave_game(request, game_id):
     game = Game.objects.get(id=game_id)
     user_profile = UserProfile.objects.get(user=request.user)
     game_profile = GameProfile.objects.get(game=game, user=user_profile)
+    if game.active:
+        return Response(
+            {"error": "cannot leave active game"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
     try:
         game_profile.delete()
     except Exception as _:

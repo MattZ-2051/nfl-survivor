@@ -101,12 +101,15 @@ const GameDetail: FC = () => {
                                 <div className="flex">
                                     <h1>Name:</h1>
                                     <h1 className="ml-4">{gameInfo.name}</h1>
-                                    <Button
-                                        label="Leave Game"
-                                        type="primary"
-                                        onClick={handleLeaveGame}
-                                        className="ml-4"
-                                    />
+                                    {!gameInfo.active &&
+                                        gameInfo.status !== 'finished' && (
+                                            <Button
+                                                label="Leave Game"
+                                                type="primary"
+                                                onClick={handleLeaveGame}
+                                                className="ml-4"
+                                            />
+                                        )}
                                 </div>
                                 <div className="flex">
                                     <h1>Current Week:</h1>
