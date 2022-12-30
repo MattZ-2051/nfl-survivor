@@ -26,7 +26,8 @@ const CreateGame: FC = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full h-full mt-12">
+            <h1 className="text-center text-white">{'Create Game'}</h1>
             <Button
                 type="outlined"
                 label="Create Game"

@@ -27,7 +27,8 @@ const Games: FC = () => {
         <>
             <Header />
             {!loading && (
-                <div className="flex items-center justify-center w-full h-full">
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                    <CreateGame />
                     {gameProfile ? (
                         <ActiveGames games={games} userGames={gameProfile} />
                     ) : (
@@ -35,7 +36,6 @@ const Games: FC = () => {
                             <h1 className="text-4xl text-center text-white">
                                 {"Looks like you don't have any active games!"}
                             </h1>
-                            <CreateGame />
                             {games && <FindGames games={games} />}
                         </div>
                     )}

@@ -9,15 +9,17 @@ interface IProps {
 const GamesTable: FC<IProps> = ({ games }) => {
     return (
         <>
-            <Table
-                headers={['Game Name', '']}
-                body={[
-                    ...games.map((game) => [
-                        game.name,
-                        game.active ? 'No' : <JoinGame />,
-                    ]),
-                ]}
-            />
+            <div className="min-w-[500px]">
+                <Table
+                    headers={['Game Name', '']}
+                    body={[
+                        ...games.map((game) => [
+                            game.name,
+                            game.active ? 'No' : <JoinGame />,
+                        ]),
+                    ]}
+                />
+            </div>
         </>
     )
 }

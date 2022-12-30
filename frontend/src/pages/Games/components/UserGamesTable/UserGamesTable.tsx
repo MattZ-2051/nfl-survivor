@@ -8,7 +8,7 @@ interface IProps {
 }
 const UserGamesTable: FC<IProps> = ({ games }) => {
     return (
-        <div>
+        <div className="min-w-[500px]">
             <Table
                 active
                 headers={['Game Name', 'Game Status']}
