@@ -28,7 +28,9 @@ scrapyd = "*"
 scrapy-djangoitem = "*"
 python-scrapyd-api = "*"
 gunicorn = "*"
-scrapyd-api = "*"
+django-cron = "*"
+celery = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
