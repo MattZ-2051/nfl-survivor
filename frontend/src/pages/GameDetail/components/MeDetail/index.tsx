@@ -12,6 +12,41 @@ interface IProps {
 
 const MeDetail: FC<IProps> = ({ userProfile }) => {
     const teams = useStore($teams)
+    const isLoser = userProfile.is_loser
+
+    const TableBody = () => {
+        return isLoser ? (
+            <>
+                <p>{"Cannot pick a team you're a loser"}</p>
+            </>
+        ) : (
+            <>
+                {userProfile.current_pick ? (
+                    <p>{userProfile.current_pick.team.team_name}</p>
+                ) : (
+                    <p>Select Pick</p>
+                )}
+                <div className="ml-4">
+                    {teams && userProfile && (
+                        <SelectPick
+                            prevPicks={userProfile.prev_picks}
+                            availablePicks={teams?.filter((team) => {
+                                if (
+                                    !userProfile?.prev_picks?.some(
+                                        (prevPick) =>
+                                            prevPick.team.scrapy_id ===
+                                            team.scrapy_id
+                                    )
+                                ) {
+                                    return team
+                                }
+                            })}
+                        />
+                    )}
+                </div>
+            </>
+        )
+    }
     return (
         <>
             <div className="flex flex-col items-center justify-between w-full h-[400px]">
@@ -23,31 +58,7 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
                                 key={userProfile.id}
                                 className="flex items-center"
                             >
-                                {userProfile.current_pick ? (
-                                    <p>{userProfile.current_pick.team_name}</p>
-                                ) : (
-                                    <p>Select Pick</p>
-                                )}
-                                <div className="ml-4">
-                                    {teams && userProfile && (
-                                        <SelectPick
-                                            prevPicks={userProfile.prev_picks}
-                                            availablePicks={teams?.filter(
-                                                (team) => {
-                                                    if (
-                                                        !userProfile?.prev_picks?.some(
-                                                            (prevPick) =>
-                                                                prevPick.scrapy_id ===
-                                                                team.scrapy_id
-                                                        )
-                                                    ) {
-                                                        return team
-                                                    }
-                                                }
-                                            )}
-                                        />
-                                    )}
-                                </div>
+                                {TableBody()}
                             </div>,
                             userProfile.prev_picks &&
                             userProfile.prev_picks.length > 0 ? (

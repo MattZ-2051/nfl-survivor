@@ -22,9 +22,9 @@ export type GameProfile = {
     id: number
     game: Game
     user: { user: User }
-    current_pick: Team | null
-    prev_picks: Team[] | null
-    isLoser: boolean
+    current_pick: GamePick | null
+    prev_picks: GamePick[] | null
+    is_loser: boolean
     is_winner: boolean
 }
 
@@ -45,4 +45,11 @@ export type TeamSchedule = {
     team: string
     result: string
     score: string
+}
+
+export type GamePick = {
+    id: number
+    team: Team
+    week: number
+    loser: boolean
 }

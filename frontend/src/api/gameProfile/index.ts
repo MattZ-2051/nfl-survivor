@@ -1,7 +1,7 @@
 import { GameProfile } from '@types'
 import { Axios, AxiosError } from 'axios'
 import { createEffect } from 'effector'
-import { get, patch } from '../methods'
+import { get, patch, post } from '../methods'
 
 export const getGameProfileFx = createEffect<
     void,
@@ -22,12 +22,24 @@ export const getUsersInGameFx = createEffect<
 })
 
 export const updateGamePickFx = createEffect<
-    { newPick: string },
+    { newPick: string; gameId: number },
     void,
     AxiosError
->(async ({ newPick }) => {
+>(async ({ newPick, gameId }) => {
     const response = await patch('/api/games/profile/update/', {
         pick: newPick,
+        gameId,
+    })
+    return response.data
+})
+
+export const updateGameStatusFx = createEffect<
+    { gameId: number },
+    void,
+    AxiosError
+>(async ({ gameId }) => {
+    const response = await post('/api/games/profile/update/status/', {
+        gameId,
     })
     return response.data
 })

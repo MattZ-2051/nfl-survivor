@@ -4,6 +4,7 @@ import {
     getGameProfileFx,
     joinGameFx,
     leaveGameFx,
+    updateGamePickFx,
 } from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
@@ -54,6 +55,11 @@ createGameFx.failData.watch((error) => {
 
 joinGameFx.doneData.watch(() => {
     toast.success('Game Joined')
+    getGameProfileFx()
+    getGamesFx()
+})
+
+updateGamePickFx.doneData.watch(() => {
     getGameProfileFx()
     getGamesFx()
 })

@@ -35,20 +35,9 @@ const GameDetail: FC = () => {
             setGameInfo(game)
             users?.length === 0 || !users
                 ? setGameUsers(null)
-                : setGameUsers(
-                      users.filter(
-                          (user) =>
-                              user.user.user.username !== currentUser?.username
-                      ).length > 0
-                          ? users.filter(
-                                (user) =>
-                                    user.user.user.username !==
-                                    currentUser?.username
-                            )
-                          : null
-                  )
+                : setGameUsers(users)
         })()
-    }, [])
+    }, [gameProfile])
 
     const handleLeaveGame = () => {
         const gameId = Number.parseInt(

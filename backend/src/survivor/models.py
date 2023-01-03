@@ -43,8 +43,8 @@ class Game(models.Model):
         max_length=10, choices=GameStatus.choices, default=GameStatus.UPCOMING
     )
     name = models.CharField(max_length=20, null=False)
-    active = models.BooleanField(default=False, null=False, blank=True)
-    current_week = models.IntegerField(default=0, null=False, blank=True)
+    active = models.BooleanField(default=False, null=False)
+    current_week = models.IntegerField(default=1, null=False, blank=True)
 
 
 class UserProfile(models.Model):
@@ -54,11 +54,18 @@ class UserProfile(models.Model):
     )
 
 
+class GamePick(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    week = models.IntegerField(null=False)
+    loser = models.BooleanField(null=True, default=False)
+    user = models.ForeignKey("GameProfile", on_delete=models.CASCADE)
+
+
 class GameProfile(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     current_pick = models.OneToOneField(
-        Team,
+        GamePick,
         on_delete=models.CASCADE,
         related_name="current_pick",
         null=True,
@@ -66,7 +73,7 @@ class GameProfile(models.Model):
         blank=True,
     )
     prev_picks = models.ManyToManyField(
-        Team, related_name="prev_picks", default=None, blank=True
+        GamePick, related_name="prev_picks", default=None, blank=True
     )
     is_loser = models.BooleanField(default=False, null=False)
     is_winner = models.BooleanField(default=False, null=False)

@@ -22,6 +22,11 @@ urlpatterns = [
         name="update_game_profile",
     ),
     path(
+        "games/profile/update/status/",
+        game_view.update_game_status,
+        name="update_game_status",
+    ),
+    path(
         "games/profile/", game_profile_view.get_user_game_profiles, name="game_profiles"
     ),
     path("games/join/", game_view.join_game, name="join_game"),

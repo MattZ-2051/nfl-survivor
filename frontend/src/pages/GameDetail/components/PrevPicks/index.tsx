@@ -26,7 +26,7 @@ const PrevPicks: FC<IProps> = ({ profile }) => {
                     >
                         <ListGroup
                             items={profile.prev_picks.map(
-                                (team) => team.team_name
+                                (team) => team.team.team_name
                             )}
                         />
                     </Modal>
