@@ -8,7 +8,9 @@ import Tabs from './Tabs'
 import Pagination from './Pagination'
 import Dropdown from './Dropdown'
 import ListGroup from './ListGroup'
+import Switch from './Switch'
 export {
+    Switch,
     ListGroup,
     Button,
     Form,

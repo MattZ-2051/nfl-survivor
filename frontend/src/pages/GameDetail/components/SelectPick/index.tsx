@@ -1,12 +1,12 @@
 import { FC, useState } from 'react'
 import { Button, ListGroup, Modal } from '@components'
-import type { Team } from '@types'
+import type { GamePick, Team } from '@types'
 import { useEvent } from 'effector-react'
 import { toast } from 'react-toastify'
 import { updateGamePickFx } from '@api'
 
 interface IProps {
-    prevPicks: Team[] | null
+    prevPicks: GamePick[] | null
     availablePicks: Team[] | null
 }
 const SelectPick: FC<IProps> = ({ availablePicks }) => {
@@ -19,12 +19,17 @@ const SelectPick: FC<IProps> = ({ availablePicks }) => {
             toast.error('Select a Team')
             return
         }
+        const gameId = Number.parseInt(
+            window.location.pathname.split('/')[2],
+            10
+        )
         const newPick = availablePicks?.find(
             (team) => team.team_name === selectedPick
         )?.scrapy_id
         if (newPick) {
             updateGamePick({
                 newPick,
+                gameId,
             })
         }
 
