@@ -29,8 +29,9 @@ scrapy-djangoitem = "*"
 python-scrapyd-api = "*"
 gunicorn = "*"
 django-cron = "*"
-celery = "*"
+celery = {extras = ["redis"], version = "*"}
 sqlalchemy = "*"
+redis = "*"
 
 [dev-packages]
 

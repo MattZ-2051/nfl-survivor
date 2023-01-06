@@ -4,7 +4,7 @@ from celery import shared_task
 from .models import Game, GameProfile
 
 @shared_task
-def update_game_status():
+def update_game_status_task():
     games = Game.objects.all()
     for current_game in games:
         current_game.current_week += 1
