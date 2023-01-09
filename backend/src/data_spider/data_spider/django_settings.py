@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "data_spider.apps.SpiderConfig",
     "django.contrib.admin",
     "django.contrib.auth",
+    'django_celery_beat',
     "corsheaders",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
 ]
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -117,6 +119,12 @@ WSGI_APPLICATION = "server.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+CELERY_RESULT_BACKEND = "db+postgresql_psycopg2://mattzamora:Pass@123@localhost/survivor"
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 DATABASES = {
     # dev settings

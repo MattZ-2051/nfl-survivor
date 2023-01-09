@@ -126,5 +126,6 @@ def leave_game(request, game_id):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def update_game_status():
+def update_game_status(request):
+    update_game_status_task.delay()
     return Response("game updated")

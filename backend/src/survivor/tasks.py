@@ -1,7 +1,16 @@
 import json
+import subprocess
+import os
 
 from celery import shared_task
 from .models import Game, GameProfile
+
+
+@shared_task
+def update_team_results():
+    script_path = os.getcwd().split("src")[0] + "scripts/celery-crawl.sh"
+    subprocess.run([script_path], shell=True)
+
 
 @shared_task
 def update_game_status_task():
@@ -34,7 +43,6 @@ def update_game_status_task():
                             game_winners.append(profile)
             profile.current_pick = None
             profile.save()
-            current_pick.save()
             current_game.save()
         if len(game_winners) == 1:
             winner = game_winners[0]

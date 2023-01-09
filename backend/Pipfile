@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
+celery = "bash scripts/celery.sh"
 crawl = "bash scripts/crawl.sh"
 scrapyd = "bash scripts/scrapyd.sh"
 format = "pipenv run black ."
@@ -28,7 +29,6 @@ scrapyd = "*"
 scrapy-djangoitem = "*"
 python-scrapyd-api = "*"
 gunicorn = "*"
-django-cron = "*"
 celery = {extras = ["redis"], version = "*"}
 sqlalchemy = "*"
 redis = "*"
