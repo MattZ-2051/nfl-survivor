@@ -129,3 +129,13 @@ def leave_game(request, game_id):
 def update_game_status(request):
     update_game_status_task.delay()
     return Response("game updated")
+
+
+@api_view(["PATCH"])
+@permission_classes([IsAuthenticated])
+def start_game(request, game_id):
+    game = Game.objects.get(id=game_id)
+    game.active = True
+    game.status = "AC"
+    game.save()
+    return Response("Game Started")

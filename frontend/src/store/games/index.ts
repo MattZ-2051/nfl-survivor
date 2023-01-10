@@ -5,6 +5,7 @@ import {
     joinGameFx,
     leaveGameFx,
     updateGamePickFx,
+    startGameFx,
 } from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
@@ -71,6 +72,16 @@ joinGameFx.failData.watch((error) => {
         return
     }
     toast.error('Error joining game', { toastId: 'join-game-error' })
+})
+
+startGameFx.doneData.watch(() => {
+    getGamesFx()
+    getGameProfileFx()
+    toast.success('Game Started')
+})
+
+startGameFx.failData.watch(() => {
+    toast.error('Error Starting Game')
 })
 
 const updateGames = createEvent<Game[]>()

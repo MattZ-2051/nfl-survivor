@@ -26,6 +26,7 @@ export type GameProfile = {
     prev_picks: GamePick[] | null
     is_loser: boolean
     is_winner: boolean
+    is_owner: boolean
 }
 
 export type Profile = {
