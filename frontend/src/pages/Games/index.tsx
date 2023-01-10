@@ -23,6 +23,7 @@ const Games: FC = () => {
         )
     }, [])
 
+    console.log('games', games)
     return (
         <>
             <Header />

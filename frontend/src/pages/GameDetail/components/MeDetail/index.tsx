@@ -1,20 +1,45 @@
-import { FC, useEffect, useState } from 'react'
-import { GameProfile, Team } from '@types'
+import { FC } from 'react'
+import { Game, GameProfile } from '@types'
 import PrevPicks from '../PrevPicks'
 import SelectPick from '../SelectPick'
-import { Table } from '@components'
-import { useStore } from 'effector-react'
+import { Button, Table } from '@components'
+import { useEvent, useStore } from 'effector-react'
 import { $teams } from '@store'
+import { startGameFx } from '@api'
+import { toast } from 'react-toastify'
+import RemoveUser from '../RemoveUser'
 
 interface IProps {
     userProfile: GameProfile
-    gameFinished: boolean
+    gameInfo: Game
+    gameUsers: GameProfile[]
 }
 
-const MeDetail: FC<IProps> = ({ userProfile, gameFinished }) => {
+const MeDetail: FC<IProps> = ({ userProfile, gameInfo, gameUsers }) => {
     const teams = useStore($teams)
+    const startGame = useEvent(startGameFx)
+    const gameFinished = gameInfo.status === 'finished'
     const isLoser = userProfile.is_loser
+    const isOwner = userProfile.is_owner
 
+    console.log('gameUsers', gameUsers)
+
+    const handleStartGame = () => {
+        const gameId = Number.parseInt(
+            window.location.pathname.split('/')[2],
+            10
+        )
+        if (gameInfo.status === 'active') {
+            toast.error('Game already started')
+            return
+        }
+
+        if (gameInfo.status === 'finished') {
+            toast.error('Game Finished')
+            return
+        }
+        startGame({ gameId })
+    }
     const TableBody = () => {
         return isLoser ? (
             <>
@@ -54,7 +79,7 @@ const MeDetail: FC<IProps> = ({ userProfile, gameFinished }) => {
     }
     return (
         <>
-            <div className="flex flex-col items-center justify-between w-full h-[400px]">
+            <div className="flex flex-col items-center justify-between w-full h-[350px]">
                 <Table
                     headers={['Current Pick', 'Previous Picks']}
                     body={[
@@ -80,6 +105,30 @@ const MeDetail: FC<IProps> = ({ userProfile, gameFinished }) => {
                     }
                 </p>
             </div>
+            {isOwner && (
+                <>
+                    <h1 className="mb-10">Owner Settings</h1>
+                    <div className="px-12 flex flex-col">
+                        <div>
+                            <Button
+                                label="Start Game"
+                                type="primary"
+                                onClick={handleStartGame}
+                                className="w-[150px]"
+                            />
+                        </div>
+                        <div>
+                            <RemoveUser
+                                users={gameUsers.filter(
+                                    (user) =>
+                                        user.user.user.username !==
+                                        userProfile.user.user.username
+                                )}
+                            />
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     )
 }

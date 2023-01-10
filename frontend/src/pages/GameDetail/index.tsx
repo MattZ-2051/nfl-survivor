@@ -72,10 +72,11 @@ const GameDetail: FC = () => {
         },
         {
             title: 'My Game Profile',
-            content: currentUserGameProfile && (
+            content: currentUserGameProfile && gameInfo && gameUsers && (
                 <MeDetail
                     userProfile={currentUserGameProfile}
-                    gameFinished={gameInfo?.status === 'finished'}
+                    gameInfo={gameInfo}
+                    gameUsers={gameUsers}
                 />
             ),
         },

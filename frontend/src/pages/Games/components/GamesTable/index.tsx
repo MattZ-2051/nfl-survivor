@@ -11,7 +11,7 @@ const GamesTable: FC<IProps> = ({ games }) => {
         <>
             <div className="w-[500px]">
                 <Table
-                    headers={['Game Name', '']}
+                    headers={['Game Name', 'Joinable']}
                     body={[
                         ...games.map((game) => [
                             game.name,
