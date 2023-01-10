@@ -7,8 +7,9 @@ import { updateGameStatusFx } from '@api'
 
 interface IProps {
     gameUsers: GameProfile[] | null | undefined
+    gameFinished: boolean
 }
-const UsersTable: FC<IProps> = ({ gameUsers }) => {
+const UsersTable: FC<IProps> = ({ gameUsers, gameFinished }) => {
     const update = useEvent(updateGameStatusFx)
     const [selectedFilter, setSelectedFilter] = useState<string>('All')
     const [usersToShow, setUsersToShow] = useState<
@@ -43,14 +44,15 @@ const UsersTable: FC<IProps> = ({ gameUsers }) => {
     return (
         <div className="min-h-[400px]">
             <button onClick={handleClick}>Test</button>
-            {gameWinners?.length === 1 && gameWinners[0].is_winner && (
-                <div className="flex items-center justify-between w-full px-12 text-xl">
-                    <p>Game Winner</p>
-                    <p>{gameWinners[0].user.user.username}</p>
-                </div>
-            )}
-            <div className="flex justify-between w-full">
-                <p>Filter</p>
+            {gameWinners?.length === 1 &&
+                gameWinners?.[0]?.is_winner &&
+                gameFinished && (
+                    <div className="flex items-center justify-center w-full px-12 text-xl">
+                        <h1 className="mr-2">Game Winner:</h1>
+                        <h1>{gameWinners[0].user.user.username}</h1>
+                    </div>
+                )}
+            <div className="flex justify-end w-full">
                 <Dropdown
                     selectedItem={selectedFilter}
                     setSelectedItem={setSelectedFilter}

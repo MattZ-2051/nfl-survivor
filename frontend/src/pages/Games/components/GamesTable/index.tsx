@@ -9,7 +9,7 @@ interface IProps {
 const GamesTable: FC<IProps> = ({ games }) => {
     return (
         <>
-            <div className="min-w-[500px]">
+            <div className="w-[500px]">
                 <Table
                     headers={['Game Name', '']}
                     body={[

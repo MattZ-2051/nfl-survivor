@@ -7,7 +7,7 @@ import { Button, Tabs } from '@components'
 import TeamsTable from './components/TeamsTable'
 import UsersTable from './components/UsersTable'
 import MeDetail from './components/MeDetail'
-import { $gameProfile, $user } from '@store'
+import { $gameProfile } from '@store'
 import { useNavigate } from 'react-router-dom'
 
 const GameDetail: FC = () => {
@@ -19,7 +19,6 @@ const GameDetail: FC = () => {
     const [gameUsers, setGameUsers] = useState<GameProfile[] | null>()
     const [currentUserGameProfile, setCurrentUserGameProfile] =
         useState<GameProfile | null>()
-    const currentUser = useStore($user)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -37,6 +36,15 @@ const GameDetail: FC = () => {
                 ? setGameUsers(null)
                 : setGameUsers(users)
         })()
+
+        gameProfile?.length === 0 || !gameProfile
+            ? setCurrentUserGameProfile(null)
+            : setCurrentUserGameProfile(
+                  gameProfile.filter((user) => user.game.id === gameId).length >
+                      0
+                      ? gameProfile.filter((user) => user.game.id === gameId)[0]
+                      : null
+              )
     }, [gameProfile])
 
     const handleLeaveGame = () => {
@@ -48,21 +56,6 @@ const GameDetail: FC = () => {
         navigate('/games')
     }
 
-    useEffect(() => {
-        const gameId = Number.parseInt(
-            window.location.pathname.split('/')[2],
-            10
-        )
-        gameProfile?.length === 0 || !gameProfile
-            ? setCurrentUserGameProfile(null)
-            : setCurrentUserGameProfile(
-                  gameProfile.filter((user) => user.game.id === gameId).length >
-                      0
-                      ? gameProfile.filter((user) => user.game.id === gameId)[0]
-                      : null
-              )
-    }, [gameProfile])
-
     const tabs: TabsType = [
         {
             title: 'NFL Schedule',
@@ -70,12 +63,20 @@ const GameDetail: FC = () => {
         },
         {
             title: 'Game Info',
-            content: <UsersTable gameUsers={gameUsers} />,
+            content: (
+                <UsersTable
+                    gameUsers={gameUsers}
+                    gameFinished={gameInfo?.status === 'finished'}
+                />
+            ),
         },
         {
             title: 'My Game Profile',
             content: currentUserGameProfile && (
-                <MeDetail userProfile={currentUserGameProfile} />
+                <MeDetail
+                    userProfile={currentUserGameProfile}
+                    gameFinished={gameInfo?.status === 'finished'}
+                />
             ),
         },
     ]

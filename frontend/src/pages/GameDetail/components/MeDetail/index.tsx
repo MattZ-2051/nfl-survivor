@@ -8,9 +8,10 @@ import { $teams } from '@store'
 
 interface IProps {
     userProfile: GameProfile
+    gameFinished: boolean
 }
 
-const MeDetail: FC<IProps> = ({ userProfile }) => {
+const MeDetail: FC<IProps> = ({ userProfile, gameFinished }) => {
     const teams = useStore($teams)
     const isLoser = userProfile.is_loser
 
@@ -18,6 +19,10 @@ const MeDetail: FC<IProps> = ({ userProfile }) => {
         return isLoser ? (
             <>
                 <p>{"Cannot pick a team you're a loser"}</p>
+            </>
+        ) : gameFinished ? (
+            <>
+                <p>Game Finished</p>
             </>
         ) : (
             <>

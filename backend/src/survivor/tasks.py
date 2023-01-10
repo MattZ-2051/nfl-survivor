@@ -43,8 +43,9 @@ def update_game_status_task():
                             game_winners.append(profile)
             profile.current_pick = None
             profile.save()
-            current_game.save()
         if len(game_winners) == 1:
             winner = game_winners[0]
             winner.is_winner = True
             winner.save()
+            current_game.status = "finished"
+        current_game.save()
