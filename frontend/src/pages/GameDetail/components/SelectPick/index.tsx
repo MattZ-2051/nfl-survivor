@@ -11,7 +11,9 @@ interface IProps {
 }
 const SelectPick: FC<IProps> = ({ availablePicks }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-    const [selectedPick, setSelectedPick] = useState<string | null>()
+    const [selectedPick, setSelectedPick] = useState<string | null | string[]>(
+        null
+    )
     const updateGamePick = useEvent(updateGamePickFx)
 
     const updatePick = () => {

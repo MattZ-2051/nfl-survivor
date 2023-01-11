@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from django.contrib.auth.models import User
 from survivor.tasks import update_game_status_task
 from survivor.models import Game, UserProfile, GameProfile
 from ..serializers.game import GameSerializer, CreateGameSerializer
@@ -139,3 +140,27 @@ def start_game(request, game_id):
     game.status = "AC"
     game.save()
     return Response("Game Started")
+
+
+@api_view(["PATCH"])
+@permission_classes([IsAuthenticated])
+def remove_users(request, game_id):
+    game = Game.objects.get(id=game_id)
+    users_to_remove = request.data.get("users")
+    user_profile = UserProfile.objects.get(user=request.user)
+    game_profile = GameProfile.objects.get(game=game, user=user_profile)
+    if game.active:
+        return Response(
+            {"error": "Can't remove users game is active"},
+            status=status.HTTP_400_BAD_REQUEST,
+            exception=True,
+        )
+    if game_profile.is_owner:
+        for user in users_to_remove:
+            current_user = User.objects.get(username=user)
+            current_profile = UserProfile.objects.get(user=current_user)
+            current_game_profile = GameProfile.objects.get(
+                game=game, user=current_profile
+            )
+            current_game_profile.delete()
+    return Response("users removed")

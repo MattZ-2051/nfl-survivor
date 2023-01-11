@@ -18,6 +18,9 @@ urlpatterns = [
     path("games/create/", game_view.create_games, name="create_game"),
     path("games/start/<int:game_id>/", game_view.start_game, name="start_game"),
     path(
+        "games/<int:game_id>/remove/users/", game_view.remove_users, name="remove_users"
+    ),
+    path(
         "games/profile/update/",
         game_profile_view.update_user_pick,
         name="update_game_profile",

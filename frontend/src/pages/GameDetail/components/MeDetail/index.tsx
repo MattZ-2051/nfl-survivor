@@ -22,8 +22,6 @@ const MeDetail: FC<IProps> = ({ userProfile, gameInfo, gameUsers }) => {
     const isLoser = userProfile.is_loser
     const isOwner = userProfile.is_owner
 
-    console.log('gameUsers', gameUsers)
-
     const handleStartGame = () => {
         const gameId = Number.parseInt(
             window.location.pathname.split('/')[2],
@@ -108,7 +106,7 @@ const MeDetail: FC<IProps> = ({ userProfile, gameInfo, gameUsers }) => {
             {isOwner && (
                 <>
                     <h1 className="mb-10">Owner Settings</h1>
-                    <div className="px-12 flex flex-col">
+                    <div className="px-12 flex items-cen">
                         <div>
                             <Button
                                 label="Start Game"

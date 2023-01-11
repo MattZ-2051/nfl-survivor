@@ -4,8 +4,11 @@ import { CheckCircleIcon } from '@heroicons/react/24/outline'
 interface IProps {
     items: string[]
     active?: boolean
-    setCurrentPick?: (pick: string | null) => void
-    selectedPick?: string | null
+    setCurrentPick?: (
+        pick: React.SetStateAction<string | string[] | null>
+    ) => void
+    selectedPick?: string | string[] | null
+    multiple?: boolean
 }
 
 const ListGroup: FC<IProps> = ({
@@ -13,11 +16,25 @@ const ListGroup: FC<IProps> = ({
     active,
     setCurrentPick,
     selectedPick,
+    multiple,
 }) => {
     const handleSelect = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         const text = e.currentTarget.innerHTML
         if (setCurrentPick) {
-            selectedPick === text ? setCurrentPick(null) : setCurrentPick(text)
+            if (multiple && Array.isArray(selectedPick)) {
+                selectedPick.includes(text)
+                    ? setCurrentPick(
+                          selectedPick.filter((pick) => pick !== text)
+                      )
+                    : setCurrentPick((prevState) =>
+                          prevState ? [...prevState, text] : null
+                      )
+            } else {
+                console.log('here', text, selectedPick)
+                selectedPick === text
+                    ? setCurrentPick(null)
+                    : setCurrentPick(text)
+            }
         }
     }
 
@@ -33,10 +50,15 @@ const ListGroup: FC<IProps> = ({
                                     'hover:bg-gray-100 hover:cursor-pointer'
                                 }`}
                                 key={index}
-                                onClick={active ? handleSelect : () => null}
                             >
-                                {item}
-                                {item === selectedPick && (
+                                <span
+                                    onClick={active ? handleSelect : () => null}
+                                    className="w-full"
+                                >
+                                    {item}
+                                </span>
+                                {(item === selectedPick ||
+                                    selectedPick?.includes(item)) && (
                                     <CheckCircleIcon className="w-6 text-green-500" />
                                 )}
                             </li>
