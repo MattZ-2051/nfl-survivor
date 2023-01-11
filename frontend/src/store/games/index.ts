@@ -6,6 +6,7 @@ import {
     leaveGameFx,
     updateGamePickFx,
     startGameFx,
+    removeUsersFx,
 } from '@api'
 import { Game } from '@types'
 import { createEvent, createStore } from 'effector'
@@ -84,6 +85,20 @@ startGameFx.failData.watch(() => {
     toast.error('Error Starting Game')
 })
 
+removeUsersFx.doneData.watch(() => {
+    toast.success('Users Removed')
+    getGameProfileFx()
+    getGamesFx()
+})
+
+removeUsersFx.failData.watch((error) => {
+    if (error.response?.status === 400) {
+        const errorMessage = error.response.data as { error: string }
+        toast.error(errorMessage.error, { toastId: 'remove-user-error' })
+        return
+    }
+    toast.error('Error Removing Users', { toastId: 'remove-user-error' })
+})
 const updateGames = createEvent<Game[]>()
 export const $games = createStore<Game[] | null>(null).on(
     updateGames,

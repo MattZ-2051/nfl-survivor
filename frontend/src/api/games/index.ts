@@ -55,3 +55,14 @@ export const startGameFx = createEffect<{ gameId: number }, void, AxiosError>(
         return response.data
     }
 )
+
+export const removeUsersFx = createEffect<
+    { gameId: number; users: string[] },
+    void,
+    AxiosError
+>(async ({ gameId, users }) => {
+    const response = await patch(`/api/games/${gameId}/remove/users/`, {
+        users,
+    })
+    return response.data
+})

@@ -7,7 +7,6 @@ interface IProps {
     games: Game[]
 }
 const UserGamesTable: FC<IProps> = ({ games }) => {
-    console.log('games', games)
     return (
         <div className="min-w-[500px]">
             <Table
