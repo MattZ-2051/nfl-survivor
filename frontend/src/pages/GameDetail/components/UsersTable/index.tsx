@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react'
-import { Table, Switch, Dropdown } from '@components'
+import { Table, Dropdown } from '@components'
 import { GameProfile } from '@types'
 import PrevPicks from '../PrevPicks'
 import { useEvent } from 'effector-react'

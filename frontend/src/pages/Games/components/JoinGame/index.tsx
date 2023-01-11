@@ -3,7 +3,6 @@ import { Modal, Button, Input } from '@components'
 import { useEvent } from 'effector-react'
 import { joinGameFx } from '@api'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 
 const JoinGame: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
