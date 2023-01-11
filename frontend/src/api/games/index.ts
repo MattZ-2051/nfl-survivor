@@ -1,7 +1,7 @@
 import { createEffect } from 'effector'
-import { Game, GameProfile } from '@types'
+import { Game } from '@types'
 import { get, post, del, patch } from '../methods'
-import { Axios, AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 
 export const getGamesFx = createEffect<void, { games: Game[] }, AxiosError>(
     async () => {
