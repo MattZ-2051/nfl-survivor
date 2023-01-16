@@ -1,6 +1,5 @@
 #!/bin/sh
 
-pipenv shell
 until
   cd data_spider
 do

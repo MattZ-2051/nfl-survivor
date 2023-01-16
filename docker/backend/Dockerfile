@@ -10,8 +10,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
 RUN pip install gunicorn
-RUN pip install python-scrapyd-api
-RUN pip install django_cron
+RUN pip install django-celery-beat
 RUN pip install -r backend/requirements.txt
 
 ADD ./docker /app/docker
