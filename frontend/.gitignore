@@ -30,3 +30,8 @@ dist-ssr
 # formatting files
 .eslint.json
 .prettierrc
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
