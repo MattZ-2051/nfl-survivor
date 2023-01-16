@@ -32,6 +32,7 @@ gunicorn = "*"
 celery = {extras = ["redis"], version = "*"}
 sqlalchemy = "*"
 redis = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 
